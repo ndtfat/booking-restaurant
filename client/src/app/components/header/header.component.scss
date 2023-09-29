@@ -1,0 +1,39 @@
+@import '../../scss/_variables.scss';
+
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    box-shadow: 0 1px 10px 4px #00000014;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+
+    .name {
+        color: $primary;
+        font-weight: 500;
+        font-size: 26px;
+        letter-spacing: 2px;
+        margin-left: 6px;
+    }
+
+    .logo-image {
+        width: 36px;
+    }
+}
+
+.button-wrapper > *:first-child {
+    margin-right: 10px;
+}
+
+.icon {
+    font-size: 30px;
+}

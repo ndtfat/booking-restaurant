@@ -1,0 +1,24 @@
+@import '../../../../scss/_variables.scss';
+
+.wrapper {
+    display: flex;
+    padding: 50px 0;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(
+        0.647turn,
+        #1a0a47cc,
+        #0d1b4599 0.01%,
+        #0d1b45cc 51.04%,
+        #0d1b45 99.1%
+    );
+}
+
+.title {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}

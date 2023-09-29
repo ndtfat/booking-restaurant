@@ -1,0 +1,29 @@
+@import '../../scss/_variables.scss';
+@import '../../scss/_common.scss';
+
+.wrapper {
+    @include cursor;
+
+    padding: 10px 16px;
+    color: $primary;
+    font-size: 1.6rem;
+    border: 2px solid #ebebeb;
+    border-radius: 6px;
+    background-color: #fff;
+
+    &:hover {
+        border-color: $primary;
+        background-color: #efe3e3;
+    }
+
+    &--primary {
+        @extend .wrapper;
+        color: #fff;
+        background-color: $primary;
+
+        &:hover {
+            color: $primary;
+            background-color: #efe3e3;
+        }
+    }
+}

@@ -1,0 +1,8 @@
+@mixin cursor {
+    cursor: grab;
+    transition: 0.3s;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
