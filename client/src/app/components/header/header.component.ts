@@ -1,11 +1,11 @@
 import {
-    AfterViewInit,
     Component,
     ElementRef,
     OnDestroy,
     OnInit,
     ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -22,8 +22,10 @@ import {
             </span>
 
             <div *ngIf="!isScoll" class="button-wrapper">
-                <app-button>REGISTER</app-button>
-                <app-button [primary]="true">LOG IN</app-button>
+                <app-button>Register My Restaurant</app-button>
+                <app-button [primary]="true" [link]="'/auth/login'"
+                    >Log In</app-button
+                >
             </div>
 
             <app-search-bar *ngIf="isScoll" />
@@ -34,16 +36,14 @@ import {
         </div>
     `,
 })
-export class HeaderComponent implements AfterViewInit, OnInit, OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
     isScoll: boolean = false;
     @ViewChild('header') header!: ElementRef<HTMLDivElement>;
 
+    constructor(private router: Router) {}
+
     ngOnInit() {
         window.addEventListener('scroll', this.scrollEvent, true);
-    }
-
-    ngOnDestroy() {
-        window.removeEventListener('scroll', this.scrollEvent, true);
     }
 
     scrollEvent = (event: any): void => {
@@ -55,5 +55,7 @@ export class HeaderComponent implements AfterViewInit, OnInit, OnDestroy {
         this.isScoll = n >= 226;
     };
 
-    ngAfterViewInit() {}
+    ngOnDestroy() {
+        window.removeEventListener('scroll', this.scrollEvent, true);
+    }
 }

@@ -4,6 +4,7 @@
 .wrapper {
     @include cursor;
 
+    width: 100%;
     padding: 10px 16px;
     color: $primary;
     font-size: 1.6rem;

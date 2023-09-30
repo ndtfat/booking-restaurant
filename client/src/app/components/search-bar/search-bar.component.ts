@@ -14,8 +14,11 @@ import { NgIconComponent } from '@ng-icons/core';
                     (ngModelChange)="onLocationChange()"
                 >
                     <option [defaultSelected]="true">Hồ Chí Minh</option>
-                    <option *ngFor="let provide of provides" [value]="provide">
-                        {{ provide }}
+                    <option
+                        *ngFor="let province of provinces"
+                        [value]="province"
+                    >
+                        {{ province }}
                     </option>
                 </select>
             </div>
@@ -40,7 +43,7 @@ import { NgIconComponent } from '@ng-icons/core';
     `,
 })
 export class SearchBarComponent {
-    provides: string[] = [
+    provinces: string[] = [
         'Hà Nội',
         'Đà Nẵng',
         'Hải Phòng',

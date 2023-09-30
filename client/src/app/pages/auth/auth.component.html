@@ -1,0 +1,79 @@
+<div class="wrapper">
+    <div class="content">
+        <form class="form" #form="ngForm" (ngSubmit)="onSubmitForm()">
+            <h1 class="title">{{ authType | uppercase }}</h1>
+
+            <div class="input-wrapper">
+                <ng-icon class="icon" name="ionMailOutline" />
+                <input
+                    class="input"
+                    type="text"
+                    placeholder="Email"
+                    autocomplete="off"
+                    [(ngModel)]="formValue.email"
+                    name="email"
+                />
+            </div>
+
+            <div class="input-wrapper">
+                <ng-icon
+                    class="icon"
+                    *ngIf="!pwTyping"
+                    name="ionLockClosedOutline"
+                />
+                <ng-icon
+                    class="icon"
+                    *ngIf="pwTyping && !pwShow"
+                    name="ionEyeOutline"
+                    (click)="onShowPassword()"
+                />
+                <ng-icon
+                    class="icon"
+                    *ngIf="pwTyping && pwShow"
+                    name="ionEyeOffOutline"
+                    (click)="onShowPassword()"
+                />
+                <input
+                    #pwInput
+                    class="input"
+                    type="password"
+                    placeholder="Password"
+                    autocomplete="off"
+                    (input)="onPasswordChange($event)"
+                    [(ngModel)]="formValue.password"
+                    name="password"
+                />
+            </div>
+
+            <app-button class="submit-btn" [primary]="true">SUBMIT</app-button>
+        </form>
+
+        <div *ngIf="authType === 'login'" class="separate"><span>Or</span></div>
+
+        <div *ngIf="authType === 'login'" class="social-wrapper">
+            <app-button color="#0866FF">
+                <p class="social-name">
+                    <ng-icon class="icon" name="ionLogoFacebook" />
+                    Facebook
+                </p>
+            </app-button>
+
+            <app-button color="#EC3F37">
+                <p class="social-name">
+                    <ng-icon class="icon" name="ionLogoGoogle" />
+                    Google
+                </p>
+            </app-button>
+        </div>
+
+        <p *ngIf="authType === 'login'" class="helper">
+            You don't have an account yet?
+            <a routerLink="/auth/register">create one</a>
+        </p>
+
+        <p *ngIf="authType === 'register'" class="helper">
+            You had an account already?
+            <a routerLink="/auth/login">Log in</a>
+        </p>
+    </div>
+</div>
