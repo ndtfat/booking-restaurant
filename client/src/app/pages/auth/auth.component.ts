@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-auth',
@@ -12,11 +13,12 @@ export class AuthComponent {
     formValue = {
         email: '',
         password: '',
+        username: '',
     };
 
     authType!: string;
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private authService: AuthService) {
         router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.authType = event.url.includes('login')
@@ -38,7 +40,9 @@ export class AuthComponent {
             this.input.nativeElement.type === 'password' ? 'text' : 'password';
     }
 
-    onSubmitForm() {
-        console.log(this.formValue);
+    onChangeAuthType(type: string) {
+        this.authType = type;
     }
+
+    onSubmitForm() {}
 }

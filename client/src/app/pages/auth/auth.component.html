@@ -3,13 +3,23 @@
         <form class="form" #form="ngForm" (ngSubmit)="onSubmitForm()">
             <h1 class="title">{{ authType | uppercase }}</h1>
 
+            <div *ngIf="authType === 'register'" class="input-wrapper">
+                <ng-icon class="icon" name="ionPersonOutline" />
+                <input
+                    class="input"
+                    type="text"
+                    placeholder="Username"
+                    [(ngModel)]="formValue.username"
+                    name="username"
+                />
+            </div>
+
             <div class="input-wrapper">
                 <ng-icon class="icon" name="ionMailOutline" />
                 <input
                     class="input"
                     type="text"
                     placeholder="Email"
-                    autocomplete="off"
                     [(ngModel)]="formValue.email"
                     name="email"
                 />
@@ -38,7 +48,6 @@
                     class="input"
                     type="password"
                     placeholder="Password"
-                    autocomplete="off"
                     (input)="onPasswordChange($event)"
                     [(ngModel)]="formValue.password"
                     name="password"
@@ -68,12 +77,12 @@
 
         <p *ngIf="authType === 'login'" class="helper">
             You don't have an account yet?
-            <a routerLink="/auth/register">create one</a>
+            <span (click)="onChangeAuthType('register')">create one</span>
         </p>
 
         <p *ngIf="authType === 'register'" class="helper">
             You had an account already?
-            <a routerLink="/auth/login">Log in</a>
+            <span (click)="onChangeAuthType('login')">Log in</span>
         </p>
     </div>
 </div>

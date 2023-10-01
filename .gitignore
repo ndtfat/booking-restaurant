@@ -5,6 +5,7 @@ client/dist
 client/tmp
 client/out-tsc
 client/bazel-out
+client/.env
 
 # Node
 client/node_modules
@@ -40,3 +41,9 @@ client/typings
 # System files
 client/.DS_Store
 client/Thumbs.db
+
+
+################################
+
+server/node_modules
+server/.env

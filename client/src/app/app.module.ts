@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NgIconsModule } from '@ng-icons/core';
 import {
@@ -16,6 +17,7 @@ import {
     ionCloseCircleOutline,
     ionPersonCircleOutline,
     ionLogoFacebook,
+    ionPersonOutline,
 } from '@ng-icons/ionicons';
 
 import { AppComponent } from './app.component';
@@ -44,6 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         RouterModule.forRoot([]),
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
         BrowserAnimationsModule,
         NgIconsModule.withIcons({
             ionLogoGoogle,
@@ -56,6 +59,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
             ionLockClosedOutline,
             ionCloseCircleOutline,
             ionPersonCircleOutline,
+            ionPersonOutline,
         }),
     ],
     providers: [],
