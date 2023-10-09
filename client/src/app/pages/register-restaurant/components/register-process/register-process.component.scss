@@ -1,0 +1,48 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/common';
+
+$notdone: #f0f0f0;
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.line {
+    height: 2px;
+    width: 50px;
+    margin: 0 10px;
+    background-color: $notdone;
+
+    &.done {
+        background-color: $primary;
+    }
+}
+
+.step {
+    display: flex;
+    align-items: center;
+
+    span {
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        margin-right: 10px;
+        border-radius: 50%;
+        background-color: $notdone;
+    }
+
+    span.done {
+        color: #fff;
+        background-color: $primary;
+    }
+
+    .step-title {
+        color: #333;
+        margin: 0;
+        white-space: nowrap;
+    }
+}

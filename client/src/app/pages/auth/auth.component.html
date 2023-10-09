@@ -1,56 +1,30 @@
 <div class="wrapper">
     <div class="content">
-        <form class="form" #form="ngForm" (ngSubmit)="onSubmitForm()">
+        <form class="form" #form="ngForm" [formGroup]="formGroup" (ngSubmit)="onSubmitForm()">
             <h1 class="title">{{ authType | uppercase }}</h1>
 
             <div *ngIf="authType === 'register'" class="input-wrapper">
                 <ng-icon class="icon" name="ionPersonOutline" />
-                <input
-                    class="input"
-                    type="text"
-                    placeholder="Username"
-                    [(ngModel)]="formValue.username"
-                    name="username"
-                />
+                <input required class="input" type="text" placeholder="Username" formControlName="usernmae" />
             </div>
 
             <div class="input-wrapper">
                 <ng-icon class="icon" name="ionMailOutline" />
-                <input
-                    class="input"
-                    type="text"
-                    placeholder="Email"
-                    [(ngModel)]="formValue.email"
-                    name="email"
-                />
+                <input required class="input" type="text" placeholder="Email" formControlName="email" />
             </div>
 
             <div class="input-wrapper">
-                <ng-icon
-                    class="icon"
-                    *ngIf="!pwTyping"
-                    name="ionLockClosedOutline"
-                />
-                <ng-icon
-                    class="icon"
-                    *ngIf="pwTyping && !pwShow"
-                    name="ionEyeOutline"
-                    (click)="onShowPassword()"
-                />
-                <ng-icon
-                    class="icon"
-                    *ngIf="pwTyping && pwShow"
-                    name="ionEyeOffOutline"
-                    (click)="onShowPassword()"
-                />
+                <ng-icon class="icon" *ngIf="!pwTyping" name="ionLockClosedOutline" />
+                <ng-icon class="icon" *ngIf="pwTyping && !pwShow" name="ionEyeOutline" (click)="onShowPassword()" />
+                <ng-icon class="icon" *ngIf="pwTyping && pwShow" name="ionEyeOffOutline" (click)="onShowPassword()" />
                 <input
+                    required
                     #pwInput
                     class="input"
                     type="password"
                     placeholder="Password"
                     (input)="onPasswordChange($event)"
-                    [(ngModel)]="formValue.password"
-                    name="password"
+                    formControlName="password"
                 />
             </div>
 
@@ -60,17 +34,10 @@
         <div *ngIf="authType === 'login'" class="separate"><span>Or</span></div>
 
         <div *ngIf="authType === 'login'" class="social-wrapper">
-            <app-button color="#0866FF">
-                <p class="social-name">
-                    <ng-icon class="icon" name="ionLogoFacebook" />
-                    Facebook
-                </p>
-            </app-button>
-
-            <app-button color="#EC3F37">
+            <app-button (click)="onLoginGoogle()">
                 <p class="social-name">
                     <ng-icon class="icon" name="ionLogoGoogle" />
-                    Google
+                    Log in with Google
                 </p>
             </app-button>
         </div>

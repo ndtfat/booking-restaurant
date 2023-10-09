@@ -18,13 +18,13 @@
     @include cursor;
 }
 
-.input-wrapper,
+.search-wrapper,
 .select-wrapper {
     display: flex;
     align-items: center;
 }
 
-.input-wrapper {
+.search-wrapper {
     flex: 1;
     border-left: 1px solid #ccc;
     padding-left: 10px;

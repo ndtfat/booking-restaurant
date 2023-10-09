@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 //
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     user-select: none;
+    transition: 0.3s;
 }
 
 html {
@@ -23,6 +25,7 @@ h3,
 h5,
 h6 {
     font-weight: 500;
+    margin: 0;
 }
 
 select {
@@ -46,4 +49,41 @@ body {
 body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.input-wrapper {
+    border: 1px solid #ccc;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+
+    &:not(&:last-child) {
+        margin-bottom: 10px;
+    }
+
+    &:has(.input:focus),
+    &:has(.input:valid),
+    .input:focus,
+    .input:valid {
+        background-color: #f8eaeb;
+    }
+
+    .icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+    .input {
+        width: 100%;
+        font-size: 16px;
+    }
 }

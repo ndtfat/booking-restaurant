@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
     template: `
-        <app-header *ngIf="!isAuthPage" />
+        <app-header *ngIf="!isHaveHeader" />
         <router-outlet />
     `,
 })
 export class AppComponent {
-    isAuthPage: boolean = false;
+    isHaveHeader: boolean = false;
 
     constructor(private router: Router) {
         router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
-                this.isAuthPage = event.url.includes('auth');
+                this.isHaveHeader = event.url.includes('auth') || event.url.includes('register-restaurant');
             }
         });
     }

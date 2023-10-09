@@ -8,22 +8,15 @@ import { NgIconComponent } from '@ng-icons/core';
         <div class="wrapper">
             <div class="select-wrapper">
                 <ng-icon class="icon" name="ionLocationOutline" />
-                <select
-                    class="select"
-                    [(ngModel)]="selectedLocation"
-                    (ngModelChange)="onLocationChange()"
-                >
+                <select class="select" [(ngModel)]="selectedLocation" (ngModelChange)="onLocationChange()">
                     <option [defaultSelected]="true">Hồ Chí Minh</option>
-                    <option
-                        *ngFor="let province of provinces"
-                        [value]="province"
-                    >
+                    <option *ngFor="let province of provinces" [value]="province">
                         {{ province }}
                     </option>
                 </select>
             </div>
 
-            <div class="input-wrapper">
+            <div class="search-wrapper">
                 <ng-icon class="icon" name="ionSearchOutline" />
                 <input
                     type="text"

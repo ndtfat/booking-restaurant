@@ -1,0 +1,50 @@
+<form class="form" [formGroup]="formRestaurantInfo">
+    <div class="input-wrapper">
+        <input required class="input" type="text" placeholder="Name your restaurant" formControlName="name" />
+    </div>
+
+    <div class="input-wrapper">
+        <input required class="input" type="tel" placeholder="Phone number" formControlName="phoneNumber" />
+    </div>
+
+    <div class="input-wrapper">
+        <input required class="input" type="text" placeholder="Restaurant address" formControlName="address" />
+    </div>
+
+    <div class="img-input">
+        <label for="imgs">
+            <span *ngIf="!photo">
+                <ng-icon class="upload-icon" name="ionCloudUploadOutline" />
+                Upload pictures of your restaurant
+            </span>
+            <img *ngIf="photo" [src]="fileUploadedURL" alt="your-restaurant-photo" />
+        </label>
+        <input id="imgs" type="file" accept="image/*" (change)="onUploadPhoto($event)" />
+    </div>
+
+    <div class="menu">
+        <span>Your menu:</span>
+        <p>
+            Fill menu of your restaurant with food name and category of food (Appetizer, Main dish, Side dish, Desserts,
+            ...)
+        </p>
+    </div>
+
+    <div class="operation-time">
+        <span>Hours of operation:</span>
+        <div>
+            <div class="input-wrapper">
+                <input type="time" formControlName="openTime" />
+            </div>
+            <span class="separate">~</span>
+            <div class="input-wrapper">
+                <input type="time" formControlName="closeTime" />
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-wrapper">
+        <app-button class="next-btn" [primary]="false" (click)="onClickBack()">Back</app-button>
+        <app-button class="next-btn" [primary]="true" (click)="onDone()">Done</app-button>
+    </div>
+</form>

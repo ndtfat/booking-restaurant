@@ -1,0 +1,12 @@
+@import '../../scss/common';
+
+.wrapper {
+    @include shadow;
+
+    margin: auto;
+    height: 100vh;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

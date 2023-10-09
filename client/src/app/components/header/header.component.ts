@@ -1,10 +1,4 @@
-import {
-    Component,
-    ElementRef,
-    OnDestroy,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,19 +7,13 @@ import { Router } from '@angular/router';
     template: `
         <div #header class="wrapper">
             <span class="logo-wrapper">
-                <img
-                    alt="logo-image"
-                    src="../../../assets/logo.png"
-                    class="logo-image"
-                />
+                <img alt="logo-image" src="../../../assets/logo.png" class="logo-image" />
                 <h1 *ngIf="!isScoll" class="name">ReserveBites</h1>
             </span>
 
             <div *ngIf="!isScoll" class="button-wrapper">
-                <app-button>Register My Restaurant</app-button>
-                <app-button [primary]="true" [link]="'/auth/login'"
-                    >Log In</app-button
-                >
+                <app-button [link]="'/register-restaurant'">Register My Restaurant</app-button>
+                <app-button [primary]="true" [link]="'/auth/login'">Log In</app-button>
             </div>
 
             <app-search-bar *ngIf="isScoll" />
@@ -48,9 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     scrollEvent = (event: any): void => {
         const n = event.srcElement.scrollingElement.scrollTop;
-        this.header.nativeElement.style.background = `rgba(255,255,255, ${
-            n / 226
-        })`;
+        this.header.nativeElement.style.background = `rgba(255,255,255, ${n / 226})`;
 
         this.isScoll = n >= 226;
     };

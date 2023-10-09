@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 
 import User from '../models/User';
 import Token from '../models/Token';
+import passport from 'passport';
+import Restaurant from '../models/Restaurant';
 
 const generateAccessToken = (data: any) => {
     return jwt.sign(data, process.env.ACCESS_TOKEN_KEY as string, {
@@ -30,62 +32,81 @@ class AuthController {
         } catch (error: any) {
             if (error.code && error.code === 11000) {
                 return res.status(403).json({
-                    message: 'Registration failed',
-                    error: error.keyPattern['email']
-                        ? 'Email already in use'
-                        : 'Username already in use',
+                    message: error.keyPattern['email'] ? 'Email already in use' : 'Username already in use',
                 });
-            } else
-                return res.status(500).json({ message: 'Server error', error });
+            } else return res.status(500).json({ message: 'Server error', error });
         }
     }
 
+    // [POST] /auth/register-restaurant
+    async registerRestaurant(req: Request, res: Response) {
+        try {
+            const ownerInfo = req.body.ownerInfo;
+            const restaurantInfo = req.body.restaurantInfo;
+
+            const newUser = new User({ ...ownerInfo, isRestaurantOwner: true });
+            const user = await newUser.save();
+
+            const newRestaurant = new Restaurant({ ...restaurantInfo, photos: [restaurantInfo.photo] });
+            const restaurant = await newRestaurant.save();
+
+            return res.status(200).json({
+                message: 'Restaurant is registered successfully',
+                data: {
+                    user,
+                    restaurant,
+                },
+            });
+        } catch (error: any) {
+            if (error.code && error.code === 11000) {
+                return res.status(403).json({
+                    message: error.keyPattern['email'] ? 'Email already in use' : 'Username already in use',
+                });
+            } else return res.status(500).json({ message: 'Server error', error });
+        }
+    }
+
+    // [POST] /auth/login
     async login(req: Request, res: Response) {
         try {
             const payload = req.body;
             const user = await User.findOne({ email: payload.email });
 
-            if (!user) {
-                return res.status(401).json({ message: 'User not found' });
-            }
+            if (!user) return res.status(401).json({ message: 'Email not found' });
 
-            const isValidPassword = await bcrypt.compare(
-                payload.password,
-                user.password,
-            );
+            const isValidPassword = await bcrypt.compare(payload.password, user.password);
 
-            if (isValidPassword) {
-                const safeData = {
-                    id: user.id,
-                    email: user.email,
-                    isRestaurantOWner: user.isRestaurantOwner,
-                };
-                const accessToken = generateAccessToken(safeData);
-                const refreshToken = generateRefreshToken(safeData);
+            if (!isValidPassword) return res.status(401).json({ message: 'Your password is incorrect' });
 
-                const userToken = await Token.findOneAndUpdate(
-                    { userId: user.id },
-                    { accessToken, refreshToken },
-                );
+            // isValidPassword
+            const safeData = {
+                id: user.id,
+                email: user.email,
+                isRestaurantOWner: user.isRestaurantOwner,
+            };
+            const accessToken = generateAccessToken(safeData);
+            const refreshToken = generateRefreshToken(safeData);
 
-                if (!userToken) {
-                    await Token.create({
-                        userId: user.id,
-                        accessToken,
-                        refreshToken,
-                    });
-                }
+            const userToken = await Token.findOneAndUpdate({ userId: user.id }, { accessToken, refreshToken });
 
-                return res.status(200).json({
-                    message: 'Login successful',
-                    data: { ...safeData, accessToken, refreshToken },
+            if (!userToken) {
+                await Token.create({
+                    userId: user.id,
+                    accessToken,
+                    refreshToken,
                 });
             }
+
+            return res.status(200).json({
+                message: 'Login successful',
+                data: { ...safeData, accessToken, refreshToken },
+            });
         } catch (error) {
             return res.status(500).json({ message: 'Server error', error });
         }
     }
 
+    // [POST] /auth/logout
     async logout(req: Request, res: Response) {
         try {
             await Token.deleteOne({ userId: req.body.userId });
@@ -95,6 +116,7 @@ class AuthController {
         }
     }
 
+    // [POST] /auth/refreshToken
     async refreshToken(req: Request, res: Response) {
         try {
             const userId = req.body.userId;
@@ -102,8 +124,7 @@ class AuthController {
             const userToken = await Token.findOne({ userId });
 
             // check user existence
-            if (!user)
-                return res.status(401).json({ message: 'User not found' });
+            if (!user) return res.status(401).json({ message: 'User not found' });
 
             const safeData = {
                 id: user.id,
@@ -119,10 +140,7 @@ class AuthController {
             }
 
             // check token expiration
-            await jwt.verify(
-                userToken.refreshToken,
-                process.env.REFRESH_TOKEN_KEY as string,
-            );
+            await jwt.verify(userToken.refreshToken, process.env.REFRESH_TOKEN_KEY as string);
 
             const newAccessToken = await generateAccessToken(safeData);
             return res.status(200).json({
@@ -131,11 +149,8 @@ class AuthController {
             });
         } catch (error: any) {
             if (error['name'] === 'TokenExpiredError') {
-                return res
-                    .status(401)
-                    .json({ message: 'Token expired! Please log in', error });
-            } else
-                return res.status(500).json({ message: 'Server error', error });
+                return res.status(401).json({ message: 'Token expired! Please log in', error });
+            } else return res.status(500).json({ message: 'Server error', error });
         }
     }
 }
