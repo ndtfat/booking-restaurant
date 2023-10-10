@@ -6,6 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgIconsModule } from '@ng-icons/core';
 import {
@@ -37,6 +40,7 @@ import { RegisterRestaurantComponent } from './pages/register-restaurant/registe
 import { OwnerInfoComponent } from './pages/register-restaurant/components/owner-info/owner-info.component';
 import { RestaurantInfoComponent } from './pages/register-restaurant/components/restaurant-info/restaurant-info.component';
 import { RegisterProcessComponent } from './pages/register-restaurant/components/register-process/register-process.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
     declarations: [
@@ -62,6 +66,16 @@ import { RegisterProcessComponent } from './pages/register-restaurant/components
         HttpClientModule,
         BrowserAnimationsModule,
         MatSnackBarModule,
+        AngularFireModule.initializeApp({
+            apiKey: 'AIzaSyBwpH__WQWqimTOj4V7hcjnG_LVgCnU26k',
+            authDomain: 'booking-restaurant-c51f5.firebaseapp.com',
+            projectId: 'booking-restaurant-c51f5',
+            storageBucket: 'booking-restaurant-c51f5.appspot.com',
+            messagingSenderId: '557628299403',
+            appId: '1:557628299403:web:b0ae505395600a917e1c8e',
+            measurementId: 'G-V2H2BGBJE6',
+        }),
+        AngularFireStorageModule,
         NgIconsModule.withIcons({
             ionLogoGoogle,
             ionLogoFacebook,

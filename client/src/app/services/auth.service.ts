@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 import User from '../models/User';
 import Restaurant from '../models/Restaurant';
@@ -14,7 +15,12 @@ export class AuthService {
     #user!: User;
     #restaurant!: Restaurant | null;
 
-    constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private snackBar: MatSnackBar,
+        private fbStorage: AngularFireStorage,
+    ) {}
 
     get user(): User {
         return this.#user;
@@ -35,8 +41,22 @@ export class AuthService {
         });
     }
 
-    registerRestaurant(payload: any) {
-        console.log(payload);
+    async registerRestaurant(payload: any) {
+        //upload restaurant photo to firebase
+        const file: File = payload.restaurantInfo.photo;
+        let uploadedPhoto: string = '';
+        if (file) {
+            const path = `restaurant-photo/${file.name}`;
+            const uploadTask = await this.fbStorage.upload(path, file);
+            uploadedPhoto = await uploadTask.ref.getDownloadURL();
+            console.log(uploadedPhoto);
+        }
+
+        payload = {
+            ownerInfo: payload.ownerInfo,
+            restaurantInfo: { ...payload.restaurantInfo, photo: uploadedPhoto },
+        };
+
         this.http
             .post<{ message: string; data: { user: User; restaurant: Restaurant } }>(
                 environment.SERVER_URL + '/auth/register-restaurant',
