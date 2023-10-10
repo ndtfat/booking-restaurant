@@ -44,18 +44,19 @@ class AuthController {
             const ownerInfo = req.body.ownerInfo;
             const restaurantInfo = req.body.restaurantInfo;
 
-            const newUser = new User({ ...ownerInfo, isRestaurantOwner: true });
+            const encodedPassword = await bcrypt.hash(ownerInfo.password, 10);
+            const newUser = new User({ ...ownerInfo, password: encodedPassword, isRestaurantOwner: true });
             const user = await newUser.save();
 
-            const newRestaurant = new Restaurant({ ...restaurantInfo, photos: [restaurantInfo.photo] });
+            const newRestaurant = new Restaurant({
+                ...restaurantInfo,
+                photos: [restaurantInfo.photo],
+                ownerId: user.id,
+            });
             const restaurant = await newRestaurant.save();
 
             return res.status(200).json({
                 message: 'Restaurant is registered successfully',
-                data: {
-                    user,
-                    restaurant,
-                },
             });
         } catch (error: any) {
             if (error.code && error.code === 11000) {
@@ -97,9 +98,16 @@ class AuthController {
                 });
             }
 
+            // check user is restaurant owner
+            let restaurant = null;
+            if (user.isRestaurantOwner) {
+                restaurant = await Restaurant.findOne({ ownerId: user.id });
+            }
+
+            console.log({ user: { ...safeData, accessToken, refreshToken }, restaurant });
             return res.status(200).json({
                 message: 'Login successful',
-                data: { ...safeData, accessToken, refreshToken },
+                data: { user: { ...safeData, accessToken, refreshToken }, restaurant },
             });
         } catch (error) {
             return res.status(500).json({ message: 'Server error', error });

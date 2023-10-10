@@ -11,13 +11,17 @@ import Restaurant from '../models/Restaurant';
     providedIn: 'root',
 })
 export class AuthService {
-    user!: User;
-    restaurant!: Restaurant;
+    #user!: User;
+    #restaurant!: Restaurant | null;
 
     constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
 
-    setUser(userData: User) {
-        this.user = userData;
+    get user(): User {
+        return this.#user;
+    }
+
+    get restaurant(): Restaurant | null {
+        return this.#restaurant;
     }
 
     register(payload: any) {
@@ -32,18 +36,17 @@ export class AuthService {
     }
 
     registerRestaurant(payload: any) {
+        console.log(payload);
         this.http
             .post<{ message: string; data: { user: User; restaurant: Restaurant } }>(
-                environment.SERVER_URL + 'auth/register-restaurant',
+                environment.SERVER_URL + '/auth/register-restaurant',
                 payload,
             )
             .subscribe({
                 next: (res) => {
-                    console.log(res);
-                    this.user = res.data.user;
-                    this.restaurant = res.data.restaurant;
+                    this.router.navigateByUrl('/auth/login');
                 },
-                error: (err) => {
+                error: (err: any) => {
                     console.log(err);
                     this.snackBar.open(err.error.message, 'OK');
                 },
@@ -51,15 +54,21 @@ export class AuthService {
     }
 
     login(payload: any) {
-        this.http.post<{ message: string; data: User }>(environment.SERVER_URL + '/auth/login', payload).subscribe({
-            next: (res) => {
-                this.setUser(res.data);
-                this.router.navigateByUrl('/');
-            },
-            error: (err) => {
-                this.snackBar.open(err.error.message, 'OK');
-            },
-        });
+        this.http
+            .post<{ message: string; data: { user: User; restaurant: Restaurant | null } }>(
+                environment.SERVER_URL + '/auth/login',
+                payload,
+            )
+            .subscribe({
+                next: (res) => {
+                    this.#user = res.data.user;
+                    this.#restaurant = res.data.restaurant;
+                    this.router.navigateByUrl('/');
+                },
+                error: (err) => {
+                    this.snackBar.open(err.error.message, 'OK');
+                },
+            });
     }
 
     loginGoogle() {

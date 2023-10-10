@@ -1,7 +1,15 @@
+@import '../../../../scss/_variables.scss';
 @import '../../../../scss/_common.scss';
 
 .form {
     width: 450px;
+}
+
+.separate-line {
+    width: 70%;
+    height: 2px;
+    margin: 20px auto;
+    background-color: #eb8d93;
 }
 
 .btn-wrapper {
@@ -63,6 +71,7 @@
     span {
         margin-right: 10px;
         font-size: 16px;
+        font-weight: 500;
     }
 
     .separate {
@@ -80,13 +89,55 @@
 }
 
 .menu {
-    margin: 20px 0;
-
     span {
         font-size: 16px;
+        font-weight: 500;
     }
 
     p {
         color: #858585;
+    }
+
+    .add-category-btn {
+        display: block;
+        width: 140px;
+    }
+}
+
+.category-wrapper {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+    div.input-wrapper {
+        margin-right: 10px;
+        max-width: 140px;
+
+        input {
+            width: 100%;
+        }
+    }
+
+    .menu-list {
+        flex: 1;
+
+        textarea {
+            width: 100%;
+            padding: 6px 10px;
+            font-size: 14px;
+            resize: none;
+            text-align: center;
+            border-color: #ccc;
+            font-family: 'Fredoka', sans-serif;
+
+            &::placeholder {
+                font-family: 'Fredoka', sans-serif;
+            }
+        }
+    }
+
+    .delete-icon {
+        font-size: 20px;
+        margin-left: 10px;
     }
 }

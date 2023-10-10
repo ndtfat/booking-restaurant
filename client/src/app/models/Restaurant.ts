@@ -1,5 +1,5 @@
-export interface Menu {
-    categories: string;
+export interface Category {
+    name: string;
     items: string[];
 }
 
@@ -8,7 +8,7 @@ export default interface Restaurant {
     name: string;
     desc: string;
     photos: string[];
-    menu: Menu[];
+    menu: Category[];
     openTime: number;
     reservationTIme: string[];
     rate: number;

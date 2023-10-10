@@ -9,9 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
         <div class="wrapper">
             <app-register-process [step]="step" />
             <h1 class="title">{{ step === 1 ? 'Your profile' : 'Your restaurant' }}</h1>
-            <app-owner-info *ngIf="step === 2" (clickNextStep)="onCLickNextStep($event)" [(ownerInfo)]="ownerInfo" />
+            <app-owner-info *ngIf="step === 1" (clickNextStep)="onCLickNextStep($event)" [(ownerInfo)]="ownerInfo" />
             <app-restaurant-info
-                *ngIf="step === 1"
+                *ngIf="step === 2"
                 (clickBack)="onClickBack()"
                 (clickDone)="onClickDone($event)"
                 [(restaurantInfo)]="restaurantInfo"
@@ -31,6 +31,7 @@ export class RegisterRestaurantComponent {
         phoneNumber: '',
         address: '',
         photo: null,
+        menu: [{ name: '', items: [] }],
         openTime: '',
         closeTime: '',
     };
@@ -64,10 +65,11 @@ export class RegisterRestaurantComponent {
             !this.restaurantInfo.address ||
             !this.restaurantInfo.openTime ||
             !this.restaurantInfo.closeTime ||
-            !this.restaurantInfo.phoneNumber
+            !this.restaurantInfo.phoneNumber ||
+            !this.restaurantInfo.menu
         )
             this.snackBar.open('Please fill all fields', 'OK');
         else if (!isValid) this.snackBar.open('Some infomation is invalid', 'Check');
-        else this.authService.registerRestaurant({ owner: this.ownerInfo, restaurant: this.restaurantInfo });
+        else this.authService.registerRestaurant({ ownerInfo: this.ownerInfo, restaurantInfo: this.restaurantInfo });
     }
 }

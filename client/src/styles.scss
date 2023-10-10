@@ -42,22 +42,8 @@ input {
     outline: none;
 }
 
-html,
-body {
-    height: 100%;
-}
-body {
-    margin: 0;
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
-
-html,
-body {
-    height: 100%;
-}
-body {
-    margin: 0;
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
+ul {
+    list-style-type: none;
 }
 
 .input-wrapper {
@@ -78,12 +64,12 @@ body {
     }
 
     .icon {
-        font-size: 20px;
+        font-size: 16px;
         margin-right: 10px;
     }
 
     .input {
         width: 100%;
-        font-size: 16px;
+        font-size: 14px;
     }
 }

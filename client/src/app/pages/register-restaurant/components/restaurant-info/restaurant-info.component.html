@@ -22,13 +22,43 @@
         <input id="imgs" type="file" accept="image/*" (change)="onUploadPhoto($event)" />
     </div>
 
+    <span class="separate-line"></span>
+
     <div class="menu">
         <span>Your menu:</span>
         <p>
             Fill menu of your restaurant with food name and category of food (Appetizer, Main dish, Side dish, Desserts,
             ...)
         </p>
+
+        <div>
+            <div class="category-wrapper" *ngFor="let category of menu; let i = index">
+                <div class="input-wrapper">
+                    <input
+                        type="text"
+                        placeholder="Category"
+                        [value]="category.name"
+                        (input)="onMenuInputChange(i, 'name', $event)"
+                    />
+                </div>
+                <div class="menu-list">
+                    <textarea
+                        rows="3"
+                        [value]="category.items.join('\n')"
+                        (input)="onMenuInputChange(i, 'items', $event)"
+                        placeholder="hamburger
+beef steak
+......"
+                    ></textarea>
+                </div>
+                <ng-icon class="delete-icon" name="ionCloseCircleOutline" (click)="onDeleteCategory(i)" />
+            </div>
+        </div>
+
+        <app-button [primary]="true" class="add-category-btn" (click)="onAddCategory()">Add category</app-button>
     </div>
+
+    <span class="separate-line"></span>
 
     <div class="operation-time">
         <span>Hours of operation:</span>

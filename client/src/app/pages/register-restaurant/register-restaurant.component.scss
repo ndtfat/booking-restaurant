@@ -1,12 +1,16 @@
 @import '../../scss/common';
 
 .wrapper {
-    @include shadow;
+    // @include shadow;
 
     margin: auto;
-    height: 100vh;
+    padding: 20px;
     max-width: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.title {
+    font-weight: 500;
 }

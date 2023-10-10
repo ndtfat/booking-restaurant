@@ -40,7 +40,8 @@ export class AuthComponent {
     }
 
     onChangeAuthType(type: string) {
-        this.authType = type;
+        if (type === 'register-restaurant') this.router.navigateByUrl('/register-restaurant');
+        else this.authType = type;
     }
 
     isValidForSubmit(): boolean {
@@ -56,8 +57,6 @@ export class AuthComponent {
 
     onSubmitForm() {
         if (this.isValidForSubmit()) {
-            console.log(this.formGroup);
-
             if (this.authType === 'register') {
                 this.authService.register(this.formGroup.value);
             }

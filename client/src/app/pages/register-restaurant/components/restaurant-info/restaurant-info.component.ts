@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Category } from 'src/app/models/Restaurant';
 
 @Component({
     selector: 'app-restaurant-info',
@@ -14,6 +15,7 @@ export class RestaurantInfoComponent implements OnInit {
 
     photo!: File;
     fileUploadedURL: string = '';
+    menu!: Category[];
     formRestaurantInfo!: FormGroup;
 
     ngOnInit(): void {
@@ -30,8 +32,11 @@ export class RestaurantInfoComponent implements OnInit {
         this.photo = this.restaurantInfo.photo;
         if (this.restaurantInfo.photo) this.fileUploadedURL = URL.createObjectURL(this.photo);
 
+        this.menu = this.restaurantInfo.menu;
+
+        // two way binding for restaurantInfo
         this.formRestaurantInfo.valueChanges.subscribe((data) => {
-            this.restaurantInfo = { ...data, photo: this.photo };
+            this.restaurantInfo = { ...data, photo: this.photo, menu: this.menu };
             this.restaurantInfoChange.emit(this.restaurantInfo);
         });
     }
@@ -43,6 +48,29 @@ export class RestaurantInfoComponent implements OnInit {
 
             this.fileUploadedURL = URL.createObjectURL(this.photo);
         }
+    }
+
+    onAddCategory() {
+        this.menu.push({ name: '', items: [] });
+        this.restaurantInfo.menu = [...this.menu];
+    }
+
+    onDeleteCategory(index: number) {
+        if (this.menu.length > 1) {
+            this.menu = this.menu.filter((item, i) => i !== index);
+            this.restaurantInfo.menu = [...this.menu];
+        }
+    }
+
+    onMenuInputChange(index: number, field: string, e: any) {
+        const value = field === 'name' ? e.target.value : e.target.value.split('\n');
+        this.menu.forEach((item, i) => {
+            if (index === i) {
+                if (field === 'name' || field === 'items') item[field] = value;
+            }
+        });
+
+        this.restaurantInfo.menu = [...this.menu];
     }
 
     onClickBack() {

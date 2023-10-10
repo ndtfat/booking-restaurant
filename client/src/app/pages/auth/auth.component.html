@@ -5,7 +5,7 @@
 
             <div *ngIf="authType === 'register'" class="input-wrapper">
                 <ng-icon class="icon" name="ionPersonOutline" />
-                <input required class="input" type="text" placeholder="Username" formControlName="usernmae" />
+                <input required class="input" type="text" placeholder="Username" formControlName="username" />
             </div>
 
             <div class="input-wrapper">
@@ -43,12 +43,17 @@
         </div>
 
         <p *ngIf="authType === 'login'" class="helper">
-            You don't have an account yet?
-            <span (click)="onChangeAuthType('register')">create one</span>
+            You don't have an account yet ?
+            <span (click)="onChangeAuthType('register')">Create one</span>
         </p>
 
         <p *ngIf="authType === 'register'" class="helper">
-            You had an account already?
+            Register your restaurant !
+            <span (click)="onChangeAuthType('register-restaurant')">Register</span>
+        </p>
+
+        <p *ngIf="authType === 'register'" class="helper">
+            You had an account already ?
             <span (click)="onChangeAuthType('login')">Log in</span>
         </p>
     </div>
