@@ -4,7 +4,8 @@ import { NavigationEnd, Router } from '@angular/router';
 @Component({
     selector: 'app-root',
     template: `
-        <app-header *ngIf="!isHaveHeader" />
+        <app-header *ngIf="isHaveHeader" />
+        <div [ngStyle]="{ marginTop: isHaveHeader ? '84px' : '0px' }"></div>
         <router-outlet />
     `,
 })
@@ -14,7 +15,7 @@ export class AppComponent {
     constructor(private router: Router) {
         router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
-                this.isHaveHeader = event.url.includes('auth') || event.url.includes('register-restaurant');
+                this.isHaveHeader = !(event.url.includes('auth') || event.url.includes('register-restaurant'));
             }
         });
     }

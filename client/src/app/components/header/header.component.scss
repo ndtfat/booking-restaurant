@@ -15,6 +15,7 @@
 }
 
 .logo-wrapper {
+    @include cursor;
     display: flex;
     align-items: center;
 

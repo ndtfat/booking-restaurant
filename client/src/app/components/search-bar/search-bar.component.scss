@@ -3,13 +3,21 @@
 
 .wrapper {
     display: flex;
-    padding: 4px 8px;
-    border-radius: 8px;
-    border: 1px solid $primary;
-    background-color: #fff;
-    min-width: 600px;
-}
 
+    .inputs-wrapper {
+        display: flex;
+        padding: 0 8px;
+        border-radius: 8px;
+        border: 1px solid $primary;
+        background-color: #fff;
+        min-width: 550px;
+    }
+
+    .search-btn {
+        // height: 100%;
+        margin-left: 20px;
+    }
+}
 .icon {
     font-size: 2.4rem;
 }

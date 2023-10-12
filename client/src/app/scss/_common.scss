@@ -11,30 +11,8 @@
     box-shadow: 0 1px 10px 4px #00000014;
 }
 
-@mixin input-icon {
-    border: 1px solid #ccc;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-
-    &:not(&:last-child) {
-        margin-bottom: 10px;
-    }
-
-    &:has(.input:focus),
-    &:has(.input:valid),
-    .content .input:focus,
-    .content .input:valid {
-        background-color: #f8eaeb;
-    }
-
-    .content .icon {
-        font-size: 20px;
-        margin-right: 10px;
-    }
-
-    .content .input {
-        width: 100%;
-        font-size: 16px;
-    }
+@mixin sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 152px;
 }

@@ -1,34 +1,38 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-header',
     styleUrls: ['./header.component.scss'],
     template: `
         <div #header class="wrapper">
-            <span class="logo-wrapper">
+            <span class="logo-wrapper" (click)="goHomePage()">
                 <img alt="logo-image" src="../../../assets/logo.png" class="logo-image" />
-                <h1 *ngIf="!isScoll" class="name">ReserveBites</h1>
+                <h1 *ngIf="!isSrcoll" class="name">ReserveBites</h1>
             </span>
 
-            <div *ngIf="!isScoll" class="button-wrapper">
+            <div *ngIf="!isSrcoll && !logIned" class="button-wrapper">
                 <app-button [link]="'/register-restaurant'">Register My Restaurant</app-button>
                 <app-button [primary]="true" [link]="'/auth/login'">Log In</app-button>
             </div>
 
-            <app-search-bar *ngIf="isScoll" />
+            <app-search-bar *ngIf="isSrcoll" />
 
-            <span *ngIf="isScoll" class="logo-wrapper">
+            <span *ngIf="isSrcoll || logIned" class="logo-wrapper">
                 <ng-icon class="icon" name="ionPersonCircleOutline" />
             </span>
         </div>
     `,
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    isScoll: boolean = false;
+    logIned: boolean;
+    isSrcoll: boolean = false;
     @ViewChild('header') header!: ElementRef<HTMLDivElement>;
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private authSv: AuthService) {
+        this.logIned = !!authSv.user;
+    }
 
     ngOnInit() {
         window.addEventListener('scroll', this.scrollEvent, true);
@@ -38,8 +42,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const n = event.srcElement.scrollingElement.scrollTop;
         this.header.nativeElement.style.background = `rgba(255,255,255, ${n / 226})`;
 
-        this.isScoll = n >= 226;
+        this.isSrcoll = n >= 226;
     };
+
+    goHomePage() {
+        this.router.navigateByUrl('/');
+    }
 
     ngOnDestroy() {
         window.removeEventListener('scroll', this.scrollEvent, true);

@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -12,35 +11,41 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgIconsModule } from '@ng-icons/core';
 import {
-    ionLogoGoogle,
-    ionEyeOutline,
+    ionBookmarkOutline,
+    ionChatboxOutline,
+    ionCloseCircleOutline,
+    ionCloudUploadOutline,
     ionEyeOffOutline,
-    ionSearchOutline,
-    ionMailOutline,
+    ionEyeOutline,
     ionLocationOutline,
     ionLockClosedOutline,
-    ionCloseCircleOutline,
-    ionPersonCircleOutline,
     ionLogoFacebook,
+    ionLogoGoogle,
+    ionMailOutline,
+    ionPersonCircleOutline,
     ionPersonOutline,
     ionPhonePortraitSharp,
-    ionCloudUploadOutline,
+    ionSearchOutline,
+    ionChevronForward,
+    ionTimeOutline,
 } from '@ng-icons/ionicons';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { AuthComponent } from './pages/auth/auth.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ButtonComponent } from './components/button/button.component';
-import { SearchComponent } from './pages/home/components/search/search.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { RestaurantComponent } from './pages/restaurant/restaurant.component';
+import { circumForkKnife, circumMoneyBill, circumChat1, circumMoneyCheck1 } from '@ng-icons/circum-icons';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RegisterRestaurantComponent } from './pages/register-restaurant/register-restaurant.component';
+import { AppComponent } from './app.component';
+import { ButtonComponent } from './components/button/button.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { SearchComponent } from './pages/home/components/search/search.component';
+import { HomeComponent } from './pages/home/home.component';
 import { OwnerInfoComponent } from './pages/register-restaurant/components/owner-info/owner-info.component';
-import { RestaurantInfoComponent } from './pages/register-restaurant/components/restaurant-info/restaurant-info.component';
 import { RegisterProcessComponent } from './pages/register-restaurant/components/register-process/register-process.component';
-import { environment } from 'src/environments/environment';
+import { RestaurantInfoComponent } from './pages/register-restaurant/components/restaurant-info/restaurant-info.component';
+import { RegisterRestaurantComponent } from './pages/register-restaurant/register-restaurant.component';
+import { RestaurantComponent } from './pages/restaurant/restaurant.component';
+import { DropDownComponent } from './components/drop-down/drop-down.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +61,7 @@ import { environment } from 'src/environments/environment';
         OwnerInfoComponent,
         RestaurantInfoComponent,
         RegisterProcessComponent,
+        DropDownComponent,
     ],
     imports: [
         FormsModule,
@@ -90,6 +96,13 @@ import { environment } from 'src/environments/environment';
             ionPersonOutline,
             ionPhonePortraitSharp,
             ionCloudUploadOutline,
+            ionBookmarkOutline,
+            circumForkKnife,
+            circumMoneyBill,
+            circumChat1,
+            ionChevronForward,
+            ionTimeOutline,
+            circumMoneyCheck1,
         }),
     ],
     providers: [],

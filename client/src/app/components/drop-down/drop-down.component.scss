@@ -1,0 +1,45 @@
+@import '../../../../scss/_variables.scss';
+@import '../../../../scss/_common.scss';
+
+.wrapper {
+    margin-bottom: 20px;
+
+    div {
+        @include cursor;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        font-size: 18px;
+
+        &:hover {
+            color: $primary;
+        }
+
+        .icon {
+            margin-right: 8px;
+
+            &.open {
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    ul {
+        font-size: 16px;
+        margin-top: 10px;
+        padding-left: 24px;
+        max-height: 0;
+        transform: scaleY(0);
+        transform-origin: 0 0;
+
+        &.open {
+            max-height: 100%;
+            transform: scaleY(1);
+            transition: 0.3s;
+        }
+
+        li {
+            padding-bottom: 10px;
+        }
+    }
+}

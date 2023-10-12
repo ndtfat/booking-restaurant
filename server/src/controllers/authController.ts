@@ -104,7 +104,6 @@ class AuthController {
                 restaurant = await Restaurant.findOne({ ownerId: user.id });
             }
 
-            console.log({ user: { ...safeData, accessToken, refreshToken }, restaurant });
             return res.status(200).json({
                 message: 'Login successful',
                 data: { user: { ...safeData, accessToken, refreshToken }, restaurant },

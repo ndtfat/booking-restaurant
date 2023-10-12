@@ -6,32 +6,35 @@ import { NgIconComponent } from '@ng-icons/core';
     styleUrls: ['./search-bar.component.scss'],
     template: `
         <div class="wrapper">
-            <div class="select-wrapper">
-                <ng-icon class="icon" name="ionLocationOutline" />
-                <select class="select" [(ngModel)]="selectedLocation" (ngModelChange)="onLocationChange()">
-                    <option [defaultSelected]="true">Hồ Chí Minh</option>
-                    <option *ngFor="let province of provinces" [value]="province">
-                        {{ province }}
-                    </option>
-                </select>
-            </div>
+            <div class="inputs-wrapper">
+                <div class="select-wrapper">
+                    <ng-icon class="icon" name="ionLocationOutline" />
+                    <select class="select" [(ngModel)]="selectedLocation" (ngModelChange)="onLocationChange()">
+                        <option [defaultSelected]="true">Hồ Chí Minh</option>
+                        <option *ngFor="let province of provinces" [value]="province">
+                            {{ province }}
+                        </option>
+                    </select>
+                </div>
 
-            <div class="search-wrapper">
-                <ng-icon class="icon" name="ionSearchOutline" />
-                <input
-                    type="text"
-                    class="input"
-                    placeholder="Restaurant name..."
-                    [(ngModel)]="searchText"
-                    (ngModelChange)="onSearchTextChanged()"
-                />
-                <ng-icon
-                    *ngIf="isSearching"
-                    class="icon clear"
-                    name="ionCloseCircleOutline"
-                    (click)="onClearSearch()"
-                />
+                <div class="search-wrapper">
+                    <ng-icon class="icon" name="ionSearchOutline" />
+                    <input
+                        type="text"
+                        class="input"
+                        placeholder="Restaurant name..."
+                        [(ngModel)]="searchText"
+                        (ngModelChange)="onSearchTextChanged()"
+                    />
+                    <ng-icon
+                        *ngIf="isSearching"
+                        class="icon clear"
+                        name="ionCloseCircleOutline"
+                        (click)="onClearSearch()"
+                    />
+                </div>
             </div>
+            <app-button class="search-btn" [primary]="true">Go</app-button>
         </div>
     `,
 })

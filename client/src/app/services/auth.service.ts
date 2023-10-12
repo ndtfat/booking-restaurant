@@ -12,9 +12,6 @@ import Restaurant from '../models/Restaurant';
     providedIn: 'root',
 })
 export class AuthService {
-    #user!: User;
-    #restaurant!: Restaurant | null;
-
     constructor(
         private http: HttpClient,
         private router: Router,
@@ -22,12 +19,14 @@ export class AuthService {
         private fbStorage: AngularFireStorage,
     ) {}
 
-    get user(): User {
-        return this.#user;
+    get user(): User | null {
+        const userJSON = localStorage.getItem('user');
+        return userJSON ? JSON.parse(userJSON) : null;
     }
 
     get restaurant(): Restaurant | null {
-        return this.#restaurant;
+        const restaurantJSON = localStorage.getItem('user');
+        return restaurantJSON ? JSON.parse(restaurantJSON) : null;
     }
 
     register(payload: any) {
@@ -49,7 +48,6 @@ export class AuthService {
             const path = `restaurant-photo/${file.name}`;
             const uploadTask = await this.fbStorage.upload(path, file);
             uploadedPhoto = await uploadTask.ref.getDownloadURL();
-            console.log(uploadedPhoto);
         }
 
         payload = {
@@ -81,8 +79,10 @@ export class AuthService {
             )
             .subscribe({
                 next: (res) => {
-                    this.#user = res.data.user;
-                    this.#restaurant = res.data.restaurant;
+                    const userRes = res.data.user;
+                    const restaurantRes = res.data.restaurant;
+                    localStorage.setItem('user', JSON.stringify(userRes));
+                    localStorage.setItem('restaurant', JSON.stringify(restaurantRes));
                     this.router.navigateByUrl('/');
                 },
                 error: (err) => {
