@@ -19,8 +19,12 @@ import { AuthService } from 'src/app/services/auth.service';
 
             <app-search-bar *ngIf="isSrcoll" />
 
-            <span *ngIf="isSrcoll || logIned" class="logo-wrapper">
+            <span *ngIf="isSrcoll || logIned" class="logo-wrapper menu">
                 <ng-icon class="icon" name="ionPersonCircleOutline" />
+                <ul *ngIf="!logIned">
+                    <li [routerLink]="'/auth/login'"><a>Log in</a></li>
+                    <li [routerLink]="'/register-restaurant'">Register my restaurant</li>
+                </ul>
             </span>
         </div>
     `,

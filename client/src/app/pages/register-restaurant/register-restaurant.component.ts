@@ -34,6 +34,7 @@ export class RegisterRestaurantComponent {
         menu: [{ name: '', items: [] }],
         openTime: '',
         closeTime: '',
+        reservationSize: '',
     };
 
     constructor(private snackBar: MatSnackBar, private authService: AuthService) {}

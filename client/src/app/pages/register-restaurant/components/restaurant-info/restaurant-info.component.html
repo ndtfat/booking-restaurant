@@ -73,6 +73,13 @@ beef steak
         </div>
     </div>
 
+    <div class="reservation-size">
+        <span>Reservation size:</span>
+        <div class="input-wrapper">
+            <input type="number" min="0" formControlName="reservationSize" />
+        </div>
+    </div>
+
     <div class="btn-wrapper">
         <app-button class="next-btn" [primary]="false" (click)="onClickBack()">Back</app-button>
         <app-button class="next-btn" [primary]="true" (click)="onDone()">Done</app-button>

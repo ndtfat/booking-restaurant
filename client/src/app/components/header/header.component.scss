@@ -44,3 +44,41 @@
 .icon {
     font-size: 30px;
 }
+
+.logo-wrapper.menu {
+    position: relative;
+
+    &:hover ul {
+        @include shadow;
+        max-height: 200px;
+    }
+
+    ul {
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        top: calc(100% + 10px);
+        width: 200px;
+        max-height: 0;
+        transition: max-height, 0.3s ease-in-out;
+
+        &::before {
+            content: '';
+            width: 100%;
+            height: 16px;
+            position: absolute;
+            right: 0;
+            top: -16px;
+        }
+
+        li {
+            font-size: 16px;
+            padding: 10px;
+            background-color: #fff;
+
+            &:hover {
+                background-color: $primary--blur;
+            }
+        }
+    }
+}

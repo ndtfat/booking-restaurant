@@ -27,6 +27,9 @@ export class RestaurantInfoComponent implements OnInit {
             address: new FormControl(this.restaurantInfo.address, { validators: [Validators.required] }),
             openTime: new FormControl(this.restaurantInfo.openTime, { validators: [Validators.required] }),
             closeTime: new FormControl(this.restaurantInfo.closeTime, { validators: [Validators.required] }),
+            reservationSize: new FormControl(this.restaurantInfo.reservationSize, {
+                validators: [Validators.required, Validators.min(0)],
+            }),
         });
 
         this.photo = this.restaurantInfo.photo;
