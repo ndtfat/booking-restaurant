@@ -5,11 +5,11 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./drop-down.component.scss'],
     template: `
         <div class="wrapper">
-            <div (click)="onShowItems()">
-                <ng-icon [ngClass]="isOpen ? 'icon open' : 'icon'" name="ionChevronForward" />
+            <div [ngClass]="isOpen ? 'open' : ''" (click)="onShowItems()">
+                <ng-icon class="icon" name="ionChevronForward" />
                 <span>{{ name }}</span>
             </div>
-            <ul *ngIf="items" [ngClass]="isOpen ? 'open' : ''" [style.max-height.px]="isOpen ? getMaxHeight() : '0'">
+            <ul *ngIf="items" [style.max-height.px]="isOpen ? getMaxHeight() : '0'">
                 <li *ngFor="let item of items">{{ item }}</li>
             </ul>
         </div>

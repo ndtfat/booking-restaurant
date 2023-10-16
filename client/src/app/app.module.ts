@@ -46,6 +46,10 @@ import { RestaurantInfoComponent } from './pages/register-restaurant/components/
 import { RegisterRestaurantComponent } from './pages/register-restaurant/register-restaurant.component';
 import { RestaurantComponent } from './pages/restaurant/restaurant.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
+import { RestaurantAsideComponent } from './pages/restaurant/components/restaurant-aside/restaurant-aside.component';
+import { RestaurantMainComponent } from './pages/restaurant/components/restaurant-main/restaurant-main.component';
+import { RestaurantReviewComponent } from './pages/restaurant/components/restaurant-review/restaurant-review.component';
+import { RestaurantReviewFormComponent } from './pages/restaurant/components/restaurant-review-form/restaurant-review-form.component';
 
 @NgModule({
     declarations: [
@@ -62,6 +66,10 @@ import { DropDownComponent } from './components/drop-down/drop-down.component';
         RestaurantInfoComponent,
         RegisterProcessComponent,
         DropDownComponent,
+        RestaurantAsideComponent,
+        RestaurantMainComponent,
+        RestaurantReviewComponent,
+        RestaurantReviewFormComponent,
     ],
     imports: [
         FormsModule,

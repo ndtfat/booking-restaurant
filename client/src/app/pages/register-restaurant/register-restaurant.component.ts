@@ -34,6 +34,7 @@ export class RegisterRestaurantComponent {
         menu: [{ name: '', items: [] }],
         openTime: '',
         closeTime: '',
+        payments: '',
         reservationSize: '',
     };
 

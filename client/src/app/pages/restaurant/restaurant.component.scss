@@ -1,11 +1,6 @@
 @import '../../scss/_variables.scss';
 @import '../../scss/_common.scss';
 
-@mixin border-bottom {
-    padding-bottom: 16px;
-    border-bottom: 1px solid #ccc;
-}
-
 .restaurant-img {
     position: relative;
 
@@ -24,7 +19,6 @@
     .save-icon {
         font-size: 20px;
         margin-right: 8px;
-        transform: translateY(4px);
     }
 }
 
@@ -33,139 +27,4 @@
     max-width: 1100px;
     margin: 0 auto;
     transform: translateY(-70px);
-
-    main {
-        flex: 1;
-        border-radius: 6px;
-        padding: 0 14px;
-        background-color: #fff;
-    }
-
-    aside {
-        width: 320px;
-        margin-left: 30px;
-    }
-}
-
-main {
-    height: 2000px;
-
-    .header {
-        @include sticky;
-        display: flex;
-        border-bottom: 1px solid #ccc;
-        background-color: #fff;
-
-        li {
-            @include cursor;
-            @include border-bottom;
-            border-color: $primary;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 16px 0;
-            margin-right: 30px;
-
-            &:hover {
-                color: $primary;
-            }
-        }
-    }
-
-    .restaurant-name {
-        padding: 40px 0;
-        font-size: 40px;
-        font-weight: 500;
-        border-bottom: 1px solid #ccc;
-    }
-
-    .overview {
-        display: flex;
-
-        p {
-            display: flex;
-            align-items: center;
-            // font-weight: 500;
-            margin-right: 20px;
-            font-size: 16px;
-
-            .icon {
-                font-size: 18px;
-                margin-right: 6px;
-            }
-        }
-    }
-
-    .title {
-        @include border-bottom;
-        font-size: 26px;
-        font-weight: 500;
-        margin-bottom: 20px;
-    }
-
-    .desc {
-        font-size: 16px;
-        margin-top: 10px;
-    }
-
-    .section {
-        margin-top: 40px;
-    }
-}
-
-aside {
-    .reservation-form {
-        @include sticky;
-        @include shadow;
-        background: #fff;
-        padding: 0 14px 10px;
-
-        .title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 500;
-            padding: 16px 0;
-
-            @include border-bottom;
-        }
-
-        .input {
-            margin-bottom: 10px;
-
-            label {
-                display: block;
-            }
-
-            input {
-                @include border-bottom;
-                width: 100%;
-                font-size: 18px;
-                padding: 10px 0;
-            }
-        }
-    }
-
-    .additional {
-        margin-top: 20px;
-
-        & > div {
-            margin-bottom: 10px;
-
-            p:first-child {
-                display: flex;
-                align-items: center;
-                font-size: 16px;
-                font-weight: 500;
-                margin-bottom: 6px;
-
-                .icon {
-                    margin-right: 4px;
-                }
-            }
-
-            p:last-child {
-                font-size: 14px;
-                margin-left: 20px;
-            }
-        }
-    }
 }

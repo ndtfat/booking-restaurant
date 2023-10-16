@@ -3,6 +3,7 @@ import userController from '../controllers/userController';
 
 const router = express.Router();
 
-router.post('/booking/:restaurantId', userController.booking);
+router.post('/booking', userController.booking);
+router.post('/review', userController.review);
 
 export default router;

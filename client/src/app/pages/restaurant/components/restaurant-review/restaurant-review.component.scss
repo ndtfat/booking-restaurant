@@ -1,0 +1,69 @@
+@import '../../../../scss/_variables.scss';
+@import '../../../../scss/_common.scss';
+
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+
+    .icon {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .username {
+        font-size: 20px;
+    }
+}
+
+.review-content {
+    p {
+        margin: 0;
+    }
+
+    .date {
+        color: #828282;
+        margin-bottom: 2px;
+    }
+
+    .rate {
+        display: flex;
+        margin-bottom: 10px;
+
+        p {
+            display: flex;
+            color: $primary;
+            // font-size: 16px;
+            font-weight: 500;
+            margin-right: 10px;
+
+            span {
+                color: #333;
+                margin-right: 4px;
+            }
+        }
+    }
+
+    .content {
+        font-size: 16px;
+
+        &.ellipsis {
+            @include ellipsis(3);
+        }
+    }
+
+    .more-btn {
+        @include cursor;
+        color: $primary;
+        font-weight: 500;
+    }
+}

@@ -1,0 +1,48 @@
+<main>
+    <ul class="header">
+        <li class="overview" (click)="onScrollToSection('overview')">Overview</li>
+        <li class="photo" (click)="onScrollToSection('photo')">Photos</li>
+        <li class="menu" (click)="onScrollToSection('menu')">Menu</li>
+        <li class="review" (click)="onScrollToSection('review')">Reviews</li>
+    </ul>
+
+    <h1 id="overview" class="restaurant-name">La Sen</h1>
+
+    <div class="overview">
+        <p>
+            <ng-icon class="icon" name="circumChat1" />
+            5 Reviews
+        </p>
+        <p>
+            <ng-icon class="icon" name="circumMoneyBill" />
+            {{ 30 | currency }} ~ {{ 50 | currency }}
+        </p>
+        <p>
+            <ng-icon class="icon" name="ionPersonOutline" />
+            2 ~ 10
+        </p>
+    </div>
+
+    <p class="desc">
+        At our breezy beachside restaurant, linger over Asian comfort food and contemporary interpretations of
+        Vietnamese classics.
+    </p>
+
+    <div id="menu" class="section menu">
+        <h1 class="title">Menu</h1>
+        <app-drop-down name="Main dish" [items]="['Cheese Hamburger', 'Tomato Pizaa']" />
+    </div>
+
+    <div id="review" class="section review">
+        <h1 class="title">Reviews</h1>
+        <app-restaurant-review-form />
+        <div class="filter">
+            <p>50 reviews</p>
+            <select #filter (change)="onFilterChange(filter.value)">
+                <option value="newest">Newest</option>
+                <option value="latest">Latest</option>
+            </select>
+        </div>
+        <app-restaurant-review />
+    </div>
+</main>

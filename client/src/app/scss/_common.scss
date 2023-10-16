@@ -7,6 +7,12 @@
     }
 }
 
+@mixin hoverColor($color: #da3743) {
+    &:hover {
+        color: $color;
+    }
+}
+
 @mixin shadow {
     box-shadow: 0 1px 10px 4px #00000014;
 }
@@ -15,4 +21,12 @@
     position: -webkit-sticky;
     position: sticky;
     top: 152px;
+}
+
+@mixin ellipsis($line: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
 }

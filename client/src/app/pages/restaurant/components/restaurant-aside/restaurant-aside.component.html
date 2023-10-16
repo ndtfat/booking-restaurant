@@ -1,0 +1,43 @@
+<aside>
+    <form class="reservation-form" [formGroup]="bookingForm">
+        <p class="title">Make a reservation</p>
+
+        <div class="input">
+            <label for="size">Party size</label>
+            <input id="size" type="number" [placeholder]="'2 ~ 10 (people)'" formControlName="numberOfGuests" />
+        </div>
+        <div class="input">
+            <label for="size">Date</label>
+            <input id="size" type="date" formControlName="date" />
+        </div>
+        <div class="input">
+            <label for="size">Time (8:00 AM ~ 12:00 PM)</label>
+            <input id="size" type="time" formControlName="time" />
+        </div>
+
+        <app-button [primary]="true" (click)="onBooking()">BOOK</app-button>
+    </form>
+
+    <div class="additional">
+        <div>
+            <p><ng-icon class="icon" name="ionLocationOutline" />Location</p>
+            <p>Thu Duc, Ho Chi Minh city</p>
+        </div>
+        <div>
+            <p><ng-icon class="icon" name="ionTimeOutline" />Hours of operation</p>
+            <p>8:00 AM ~ 12:00 PM</p>
+        </div>
+        <div>
+            <p><ng-icon class="icon" name="ionPhonePortraitSharp" />Phone number</p>
+            <p>0962258348</p>
+        </div>
+        <div>
+            <p><ng-icon class="icon" name="circumForkKnife" />Cuisines</p>
+            <p>Vietnamese</p>
+        </div>
+        <div>
+            <p><ng-icon class="icon" name="circumMoneyCheck1" />Payments</p>
+            <p>Credit card, Visa, Cash</p>
+        </div>
+    </div>
+</aside>

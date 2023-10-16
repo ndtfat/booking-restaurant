@@ -118,7 +118,8 @@
 }
 
 .operation-time,
-.reservation-size {
+.reservation-size,
+.payments {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -145,7 +146,8 @@
     }
 }
 
-.reservation-size .input-wrapper {
+.reservation-size .input-wrapper,
+.payments .input-wrapper {
     flex: 1;
     input {
         width: 100%;

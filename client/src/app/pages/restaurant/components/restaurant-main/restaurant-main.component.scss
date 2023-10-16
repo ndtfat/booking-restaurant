@@ -1,0 +1,99 @@
+@import '../../../../scss/_common.scss';
+@import '../../../../scss/_variables.scss';
+
+@mixin border-bottom {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+main {
+    height: 2000px;
+    flex: 1;
+    border-radius: 6px;
+    padding: 0 14px;
+    background-color: #fff;
+
+    .header {
+        @include sticky;
+        display: flex;
+        border-bottom: 1px solid #ccc;
+        background-color: #fff;
+
+        li {
+            @include cursor;
+            font-size: 18px;
+            font-weight: 400;
+            padding: 18px 0;
+            margin-right: 30px;
+
+            &:hover {
+                color: $primary;
+            }
+
+            &.active {
+                @include border-bottom;
+                border-color: $primary;
+            }
+        }
+    }
+
+    .restaurant-name {
+        padding: 40px 0;
+        font-size: 40px;
+        font-weight: 500;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .overview {
+        display: flex;
+
+        p {
+            display: flex;
+            align-items: center;
+            // font-weight: 500;
+            margin-right: 20px;
+            font-size: 16px;
+
+            .icon {
+                font-size: 18px;
+                margin-right: 6px;
+            }
+        }
+    }
+
+    .title {
+        @include border-bottom;
+        font-size: 26px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .desc {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+    .section {
+        padding-top: 20px;
+    }
+
+    .review {
+        .filter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+
+            p {
+                margin: 0;
+            }
+
+            select {
+                @include cursor;
+                @include hoverColor;
+                font-size: 16px;
+                padding: 0 10px;
+            }
+        }
+    }
+}

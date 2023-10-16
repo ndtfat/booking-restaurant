@@ -52,7 +52,11 @@ export class AuthService {
 
         payload = {
             ownerInfo: payload.ownerInfo,
-            restaurantInfo: { ...payload.restaurantInfo, photo: uploadedPhoto },
+            restaurantInfo: {
+                ...payload.restaurantInfo,
+                photo: uploadedPhoto,
+                payments: payload.restaurantInfo.payments.split(','),
+            },
         };
 
         this.http

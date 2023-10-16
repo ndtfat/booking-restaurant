@@ -5,11 +5,17 @@ export interface Category {
 
 export default interface Restaurant {
     id: string;
+    ownerId: string;
+    rate: number;
+    menu: Category[];
     name: string;
     desc: string;
     photos: string[];
-    menu: Category[];
-    openTime: number;
-    reservationTIme: string[];
-    rate: number;
+    address: string;
+    payments: string[];
+    openTime: string;
+    closeTime: string;
+    isActive: boolean;
+    phoneNumber: string;
+    reservationSize: number;
 }

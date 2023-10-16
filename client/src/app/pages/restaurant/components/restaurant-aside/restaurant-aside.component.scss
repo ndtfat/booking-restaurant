@@ -1,0 +1,67 @@
+@import '../../../../scss/_common.scss';
+
+@mixin border-bottom {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+aside {
+    width: 320px;
+    margin-left: 30px;
+
+    .reservation-form {
+        @include sticky;
+        @include shadow;
+        background: #fff;
+        padding: 0 14px 10px;
+
+        .title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 16px 0;
+
+            @include border-bottom;
+        }
+
+        .input {
+            margin-bottom: 10px;
+
+            label {
+                display: block;
+            }
+
+            input {
+                @include border-bottom;
+                width: 100%;
+                font-size: 18px;
+                padding: 10px 0;
+            }
+        }
+    }
+
+    .additional {
+        margin-top: 20px;
+
+        & > div {
+            margin-bottom: 10px;
+
+            p:first-child {
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 6px;
+
+                .icon {
+                    margin-right: 4px;
+                }
+            }
+
+            p:last-child {
+                font-size: 14px;
+                margin-left: 20px;
+            }
+        }
+    }
+}

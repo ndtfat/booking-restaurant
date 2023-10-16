@@ -80,6 +80,13 @@ beef steak
         </div>
     </div>
 
+    <div class="payments">
+        <span>Payments:</span>
+        <div class="input-wrapper">
+            <input type="text" formControlName="payments" />
+        </div>
+    </div>
+
     <div class="btn-wrapper">
         <app-button class="next-btn" [primary]="false" (click)="onClickBack()">Back</app-button>
         <app-button class="next-btn" [primary]="true" (click)="onDone()">Done</app-button>

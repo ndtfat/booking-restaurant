@@ -16,10 +16,16 @@
         }
 
         .icon {
-            margin-right: 8px;
+            margin-right: 10px;
+        }
 
-            &.open {
+        &.open {
+            .icon {
                 transform: rotate(90deg);
+            }
+
+            span {
+                color: $primary;
             }
         }
     }
