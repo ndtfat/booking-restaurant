@@ -59,8 +59,6 @@ export class RestaurantService {
             clientId: this.authSv.user?.id,
             restaurantId,
         };
-
-        console.log(reqBody);
         this.http.post<{ message: string; data: Review }>(environment.SERVER_URL + '/user/review', reqBody).subscribe({
             next: (res) => {
                 console.log(res);

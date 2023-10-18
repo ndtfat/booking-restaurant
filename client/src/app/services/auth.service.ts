@@ -7,6 +7,8 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 import User from '../models/User';
 import Restaurant from '../models/Restaurant';
+import { catchError, Observable, of, switchMap } from 'rxjs';
+import jwtDecode from 'jwt-decode';
 
 @Injectable({
     providedIn: 'root',
@@ -24,9 +26,19 @@ export class AuthService {
         return userJSON ? JSON.parse(userJSON) : null;
     }
 
+    setUser(userData: User) {
+        localStorage.setItem('user', JSON.stringify(userData));
+    }
+
     get restaurant(): Restaurant | null {
         const restaurantJSON = localStorage.getItem('user');
         return restaurantJSON ? JSON.parse(restaurantJSON) : null;
+    }
+
+    refreshToken(): Observable<{ message: string; data: string }> {
+        return this.http.post<{ message: string; data: string }>(environment.SERVER_URL + '/auth/refreshToken', {
+            userId: this.user?.id,
+        });
     }
 
     register(payload: any) {
@@ -93,6 +105,12 @@ export class AuthService {
                     this.snackBar.open(err.error.message, 'OK');
                 },
             });
+    }
+
+    signOut() {
+        console.log('Signing out');
+        localStorage.removeItem('user');
+        this.router.navigateByUrl('/auth/login');
     }
 
     loginGoogle() {

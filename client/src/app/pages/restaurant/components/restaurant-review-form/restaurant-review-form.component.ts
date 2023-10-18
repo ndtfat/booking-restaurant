@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
@@ -39,7 +40,7 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
 export class RestaurantReviewFormComponent {
     restaurantId!: string;
 
-    constructor(private route: ActivatedRoute, private restaurantSv: RestaurantService) {
+    constructor(private route: ActivatedRoute, private restaurantSv: RestaurantService, private snackBar: MatSnackBar) {
         route.params.subscribe((params) => {
             this.restaurantId = params['id'];
         });
@@ -64,6 +65,8 @@ export class RestaurantReviewFormComponent {
             };
 
             this.restaurantSv.review(payload, this.restaurantId);
+        } else {
+            this.snackBar.open('Something is missing or invalid', 'Check', { duration: 4000 });
         }
     }
 }
