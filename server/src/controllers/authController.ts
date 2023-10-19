@@ -9,13 +9,13 @@ import Restaurant from '../models/Restaurant';
 
 const generateAccessToken = (data: any) => {
     return jwt.sign(data, process.env.ACCESS_TOKEN_KEY as string, {
-        expiresIn: '1d',
+        expiresIn: '30s',
     });
 };
 
 const generateRefreshToken = (data: any) => {
     return jwt.sign(data, process.env.REFRESH_TOKEN_KEY as string, {
-        expiresIn: '30s',
+        expiresIn: '1m',
     });
 };
 
@@ -126,12 +126,12 @@ class AuthController {
     // [POST] /auth/refreshToken
     async refreshToken(req: Request, res: Response) {
         try {
+            const refreshToken = req.body.refreshToken;
             const userId = req.body.userId;
             const user = await User.findOne({ _id: userId });
-            const userToken = await Token.findOne({ userId });
 
             // check user existence
-            if (!user) return res.status(401).json({ message: 'User not found' });
+            if (!user) return res.status(401).json({ message: 'Please log in' });
 
             const safeData = {
                 id: user.id,
@@ -140,23 +140,25 @@ class AuthController {
             };
 
             // check token existence
-            if (!userToken) {
+            if (!refreshToken) {
                 return res.status(401).json({
-                    message: 'Token not found',
+                    message: 'Missing refresh token in request',
                 });
             }
 
             // check token expiration
-            await jwt.verify(userToken.refreshToken, process.env.REFRESH_TOKEN_KEY as string);
+            await jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY as string);
 
             const newAccessToken = await generateAccessToken(safeData);
             return res.status(200).json({
                 message: 'Refresh token successfully',
-                data: { ...safeData, accessToken: newAccessToken },
+                data: newAccessToken,
             });
         } catch (error: any) {
             if (error['name'] === 'TokenExpiredError') {
-                return res.status(401).json({ message: 'Token expired! Please log in', error });
+                console.log('token expired');
+
+                return res.status(401).json({ message: 'Refresh Token expired! Please log in', error });
             } else return res.status(500).json({ message: 'Server error', error });
         }
     }
