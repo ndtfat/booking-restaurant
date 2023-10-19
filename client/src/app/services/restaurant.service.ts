@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import Reservation from '../models/Reservation';
-import Review from '../models/Review';
+import Reservation from '../_share/models/Reservation';
+import Review from '../_share/models/Review';
 import { AuthService } from './auth.service';
 
 @Injectable({

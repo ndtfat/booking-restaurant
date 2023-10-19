@@ -5,8 +5,8 @@ import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
-import User from '../models/User';
-import Restaurant from '../models/Restaurant';
+import User from '../_share/models/User';
+import Restaurant from '../_share/models/Restaurant';
 import { catchError, Observable, of, switchMap } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 
@@ -35,8 +35,9 @@ export class AuthService {
         return restaurantJSON ? JSON.parse(restaurantJSON) : null;
     }
 
-    refreshToken(): Observable<{ message: string; data: string }> {
+    refreshToken(refreshToken: string): Observable<{ message: string; data: string }> {
         return this.http.post<{ message: string; data: string }>(environment.SERVER_URL + '/auth/refreshToken', {
+            refreshToken,
             userId: this.user?.id,
         });
     }
@@ -108,7 +109,6 @@ export class AuthService {
     }
 
     signOut() {
-        console.log('Signing out');
         localStorage.removeItem('user');
         this.router.navigateByUrl('/auth/login');
     }

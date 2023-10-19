@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Category } from 'src/app/models/Restaurant';
+import { Category } from 'src/app/_share/models/Restaurant';
 
 @Component({
     selector: 'app-restaurant-info',

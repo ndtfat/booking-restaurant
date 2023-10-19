@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Injectable()
 export class RefeshTokenInterceptor implements HttpInterceptor {
@@ -19,6 +19,13 @@ export class RefeshTokenInterceptor implements HttpInterceptor {
         }
         return next.handle(reqWithToken).pipe(
             catchError((error) => {
+                const errorMessage = error.error.message;
+                // Singout when refresh token is expired
+                if (errorMessage.includes('Refresh Token expired')) {
+                    this.authService.signOut();
+                    return throwError(error);
+                }
+                // handle when access token is expired
                 if (
                     error instanceof HttpErrorResponse &&
                     !reqWithToken.url.includes('auth/login') &&
@@ -39,17 +46,17 @@ export class RefeshTokenInterceptor implements HttpInterceptor {
 
             const refreshToken = this.authService.user?.refreshToken;
             if (refreshToken) {
-                return this.authService.refreshToken().pipe(
+                return this.authService.refreshToken(refreshToken).pipe(
                     switchMap((token: any) => {
                         this.isRefreshing = false;
+                        console.log(token);
+
                         // token: { message: string, data: string }}
                         this.refreshTOkenObject.next(token.data);
 
-                        return next.handle(this.addTokenToRequest(request, token));
+                        return next.handle(this.addTokenToRequest(request, token.data));
                     }),
                     catchError((error) => {
-                        console.log('catch error');
-
                         this.isRefreshing = false;
                         this.authService.signOut();
                         return throwError(error); // Rethrow the error to propagate it up the observable chain.
@@ -61,7 +68,10 @@ export class RefeshTokenInterceptor implements HttpInterceptor {
         return this.refreshTOkenObject.pipe(
             filter((token) => token !== null),
             take(1),
-            switchMap((token) => next.handle(this.addTokenToRequest(request, token))),
+            switchMap((token) => {
+                console.log(token);
+                return next.handle(this.addTokenToRequest(request, token));
+            }),
         );
     }
 

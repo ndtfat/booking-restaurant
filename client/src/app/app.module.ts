@@ -50,7 +50,7 @@ import { RestaurantAsideComponent } from './pages/restaurant/components/restaura
 import { RestaurantMainComponent } from './pages/restaurant/components/restaurant-main/restaurant-main.component';
 import { RestaurantReviewComponent } from './pages/restaurant/components/restaurant-review/restaurant-review.component';
 import { RestaurantReviewFormComponent } from './pages/restaurant/components/restaurant-review-form/restaurant-review-form.component';
-import { RefeshTokenInterceptor } from './interceptors/refesh-token.interceptor';
+import { RefeshTokenInterceptor } from './_helpers/interceptors/refesh-token.interceptor';
 
 @NgModule({
     declarations: [
