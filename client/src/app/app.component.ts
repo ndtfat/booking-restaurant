@@ -5,7 +5,7 @@ import { NavigationEnd, Router } from '@angular/router';
     selector: 'app-root',
     template: `
         <app-header *ngIf="isHaveHeader" />
-        <div [ngStyle]="{ marginTop: isHaveHeader ? '84px' : '0px' }"></div>
+        <div [ngStyle]="{ marginTop: isHaveHeader ? '90px' : '0px' }"></div>
         <router-outlet />
     `,
 })

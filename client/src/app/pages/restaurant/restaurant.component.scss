@@ -24,7 +24,7 @@
 
 .content {
     display: flex;
-    max-width: 1100px;
+    max-width: $body-width;
     margin: 0 auto;
     transform: translateY(-70px);
 }

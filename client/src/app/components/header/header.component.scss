@@ -1,5 +1,5 @@
-@import '../../scss/_variables.scss';
 @import '../../scss/_common.scss';
+@import '../../scss/_variables.scss';
 
 .wrapper {
     @include shadow;
@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 30px;
+    background-color: #000;
 }
 
 .logo-wrapper {
@@ -20,8 +21,7 @@
     align-items: center;
 
     .name {
-        color: $primary;
-        font-weight: 500;
+        color: #fff;
         font-size: 26px;
         letter-spacing: 2px;
         margin: 0;
@@ -29,7 +29,7 @@
     }
 
     .logo-image {
-        width: 36px;
+        width: 60px;
     }
 }
 
@@ -42,6 +42,7 @@
 }
 
 .icon {
+    color: $text-color;
     font-size: 30px;
 }
 
@@ -77,6 +78,7 @@
             background-color: #fff;
 
             &:hover {
+                color: $text-color;
                 background-color: $primary--blur;
             }
         }

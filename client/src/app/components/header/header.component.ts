@@ -9,11 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
         <div #header class="wrapper">
             <span class="logo-wrapper" (click)="goHomePage()">
                 <img alt="logo-image" src="../../../assets/logo.png" class="logo-image" />
-                <h1 *ngIf="!isSrcoll" class="name">ReserveBites</h1>
+                <p *ngIf="!isSrcoll" class="name">ReserveBites</p>
             </span>
 
             <div *ngIf="!isSrcoll && !logIned" class="button-wrapper">
-                <app-button [link]="'/register-restaurant'">Register My Restaurant</app-button>
+                <app-button [primary]="true" [link]="'/register-restaurant'">Register My Restaurant</app-button>
                 <app-button [primary]="true" [link]="'/auth/login'">Log In</app-button>
             </div>
 
@@ -22,7 +22,7 @@ import { AuthService } from 'src/app/services/auth.service';
             <span *ngIf="isSrcoll || logIned" class="logo-wrapper menu">
                 <ng-icon class="icon" name="ionPersonCircleOutline" />
                 <ul *ngIf="!logIned">
-                    <li [routerLink]="'/auth/login'"><a>Log in</a></li>
+                    <li [routerLink]="'/auth/login'">Log in</li>
                     <li [routerLink]="'/register-restaurant'">Register my restaurant</li>
                 </ul>
             </span>
@@ -32,7 +32,6 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit, OnDestroy {
     logIned: boolean;
     isSrcoll: boolean = false;
-    @ViewChild('header') header!: ElementRef<HTMLDivElement>;
 
     constructor(private router: Router, private authSv: AuthService) {
         this.logIned = !!authSv.user;
@@ -44,8 +43,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     scrollEvent = (event: any): void => {
         const n = event.srcElement.scrollingElement.scrollTop;
-        this.header.nativeElement.style.background = `rgba(255,255,255, ${n / 226})`;
-
         this.isSrcoll = n >= 226;
     };
 

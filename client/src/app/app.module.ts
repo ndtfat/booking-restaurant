@@ -51,6 +51,7 @@ import { RestaurantMainComponent } from './pages/restaurant/components/restauran
 import { RestaurantReviewComponent } from './pages/restaurant/components/restaurant-review/restaurant-review.component';
 import { RestaurantReviewFormComponent } from './pages/restaurant/components/restaurant-review-form/restaurant-review-form.component';
 import { RefeshTokenInterceptor } from './_helpers/interceptors/refesh-token.interceptor';
+import { RestaurantCardComponent } from './components/restaurant-card/restaurant-card.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +72,7 @@ import { RefeshTokenInterceptor } from './_helpers/interceptors/refesh-token.int
         RestaurantMainComponent,
         RestaurantReviewComponent,
         RestaurantReviewFormComponent,
+        RestaurantCardComponent,
     ],
     imports: [
         FormsModule,

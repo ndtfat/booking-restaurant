@@ -1,3 +1,32 @@
+@import '../../scss//variables';
+@import '../../scss//common';
+
 .body {
-    height: 2000px;
+    margin: 0 auto;
+    max-width: $body-width;
+    padding: 30px;
+}
+
+.title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.restaurant-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 20px;
+
+    li {
+        padding: 10px;
+
+        &:hover {
+            @include shadow;
+            transform: translateY(-2px);
+        }
+
+        a {
+            text-decoration: none;
+        }
+    }
 }

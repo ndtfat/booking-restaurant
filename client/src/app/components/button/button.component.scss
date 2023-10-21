@@ -1,23 +1,18 @@
-@import '../../scss/_variables.scss';
 @import '../../scss/_common.scss';
+@import '../../scss/_variables.scss';
 
 .wrapper {
     @include cursor;
+    border: none;
 
     display: flex;
     justify-content: center;
     width: 100%;
+    color: $text-color;
     padding: 10px 16px;
-    color: #333;
     font-size: 1.6rem;
-    border: 2px solid #ebebeb;
     border-radius: 6px;
-    background-color: #fff;
-
-    &:hover {
-        border-color: $primary;
-        background-color: #efe3e3;
-    }
+    background-color: transparent;
 
     &--primary {
         @extend .wrapper;
@@ -25,8 +20,7 @@
         background-color: $primary;
 
         &:hover {
-            color: $primary;
-            background-color: #efe3e3;
+            background-color: $primary--blur;
         }
     }
 }
