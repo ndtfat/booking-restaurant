@@ -8,7 +8,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_KEY as string, (err: any, user: any) => {
             if (err) return res.status(401).json({ message: 'Invalid Access Token', err });
             else {
-                req.user = user;
                 next();
             }
         });

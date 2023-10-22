@@ -34,11 +34,11 @@
         <div *ngIf="authType === 'login'" class="separate"><span>Or</span></div>
 
         <div *ngIf="authType === 'login'" class="social-wrapper">
-            <app-button (click)="onLoginGoogle()">
-                <p class="social-name">
-                    <ng-icon class="icon" name="ionLogoGoogle" />
-                    Log in with Google
-                </p>
+            <app-button [outlined]="true" (click)="onLoginGoogle()">
+                <!-- <p class="social-name"> -->
+                <ng-icon class="icon" name="ionLogoGoogle" />
+                Log in with Google
+                <!-- </p> -->
             </app-button>
         </div>
 
@@ -47,7 +47,7 @@
             <span (click)="onChangeAuthType('register')">Create one</span>
         </p>
 
-        <p *ngIf="authType === 'register'" class="helper">
+        <p *ngIf="authType === 'register'" class="helper register-restaurant">
             Register your restaurant !
             <span (click)="onChangeAuthType('register-restaurant')">Register</span>
         </p>

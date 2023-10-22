@@ -23,4 +23,15 @@
             background-color: $primary--blur;
         }
     }
+
+    &--outlined {
+        @extend .wrapper;
+        color: $primary;
+        border: 1px solid $primary;
+
+        &:hover {
+            color: $text-color;
+            background-color: $primary--blur;
+        }
+    }
 }
