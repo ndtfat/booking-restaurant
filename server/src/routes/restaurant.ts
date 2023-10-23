@@ -4,7 +4,7 @@ import restaurantController from '../controllers/restaurantController';
 
 const router = Router();
 
-router.get('/suggest', verifyToken, restaurantController.getSuggest);
-router.get('/:id', verifyToken, restaurantController.getInfo);
+router.get('/suggest', restaurantController.getSuggest);
+router.get('/:id', restaurantController.getInfo);
 
 export default router;
