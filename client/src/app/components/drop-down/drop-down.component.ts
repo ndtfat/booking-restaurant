@@ -10,14 +10,16 @@ import { Component, Input } from '@angular/core';
                 <span>{{ name }}</span>
             </div>
             <ul *ngIf="items" [style.max-height.px]="isOpen ? getMaxHeight() : '0'">
-                <li *ngFor="let item of items">{{ item }}</li>
+                <li *ngFor="let item of items">
+                    {{ item.name }} <span>{{ item.price | currency }}</span>
+                </li>
             </ul>
         </div>
     `,
 })
 export class DropDownComponent {
     @Input() name!: string;
-    @Input() items!: string[];
+    @Input() items!: any[];
 
     isOpen: boolean = false;
 

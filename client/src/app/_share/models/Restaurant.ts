@@ -1,10 +1,10 @@
 export interface Category {
-    name: string;
-    items: string[];
+    category: string;
+    items: { name: string; price: number }[];
 }
 
 export default interface Restaurant {
-    id: string;
+    _id: string;
     ownerId: string;
     rate: number;
     menu: Category[];
@@ -18,4 +18,5 @@ export default interface Restaurant {
     isActive: boolean;
     phoneNumber: string;
     reservationSize: number;
+    cuisines?: string[];
 }

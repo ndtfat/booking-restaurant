@@ -27,8 +27,8 @@
     <div class="menu">
         <span>Your menu:</span>
         <p>
-            Fill menu of your restaurant with food name and category of food (Appetizer, Main dish, Side dish, Desserts,
-            ...)
+            Fill menu of your restaurant with food name and category of food and it's price. EX: Main dish: Beef steak -
+            10 (with Main dish is category; Beef steak is name and 10 is price).
         </p>
 
         <div>
@@ -37,8 +37,8 @@
                     <input
                         type="text"
                         placeholder="Category"
-                        [value]="category.name"
-                        (input)="onMenuInputChange(i, 'name', $event)"
+                        [value]="category.category"
+                        (input)="onMenuInputChange(i, 'category', $event)"
                     />
                 </div>
                 <div class="menu-list">
@@ -46,8 +46,8 @@
                         rows="3"
                         [value]="category.items.join('\n')"
                         (input)="onMenuInputChange(i, 'items', $event)"
-                        placeholder="hamburger
-beef steak
+                        placeholder="hamburger - 10
+beef steak - 20
 ......"
                     ></textarea>
                 </div>
@@ -88,7 +88,7 @@ beef steak
     </div>
 
     <div class="btn-wrapper">
-        <app-button class="next-btn" [primary]="false" (click)="onClickBack()">Back</app-button>
+        <app-button class="next-btn" [outlined]="true" (click)="onClickBack()">Back</app-button>
         <app-button class="next-btn" [primary]="true" (click)="onDone()">Done</app-button>
     </div>
 </form>

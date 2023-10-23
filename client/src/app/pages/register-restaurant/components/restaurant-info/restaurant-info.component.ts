@@ -55,7 +55,7 @@ export class RestaurantInfoComponent implements OnInit {
     }
 
     onAddCategory() {
-        this.menu.push({ name: '', items: [] });
+        this.menu.push({ category: '', items: [] });
         this.restaurantInfo.menu = [...this.menu];
     }
 
@@ -67,10 +67,11 @@ export class RestaurantInfoComponent implements OnInit {
     }
 
     onMenuInputChange(index: number, field: string, e: any) {
-        const value = field === 'name' ? e.target.value : e.target.value.split('\n');
+        // if items field changed, format items to array
+        const value = field === 'category' ? e.target.value : e.target.value.split('\n');
         this.menu.forEach((item, i) => {
             if (index === i) {
-                if (field === 'name' || field === 'items') item[field] = value;
+                if (field === 'category' || field === 'items') item[field] = value;
             }
         });
 

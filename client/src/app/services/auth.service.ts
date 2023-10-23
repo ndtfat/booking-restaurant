@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 import User from '../_share/models/User';
-import Restaurant from '../_share/models/Restaurant';
+import Restaurant, { Category } from '../_share/models/Restaurant';
 import { catchError, Observable, of, switchMap } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 
@@ -54,7 +54,7 @@ export class AuthService {
     }
 
     async registerRestaurant(payload: any) {
-        //upload restaurant photo to firebase
+        // upload restaurant photo to firebase
         const file: File = payload.restaurantInfo.photo;
         let uploadedPhoto: string = '';
         if (file) {
@@ -63,10 +63,27 @@ export class AuthService {
             uploadedPhoto = await uploadTask.ref.getDownloadURL();
         }
 
+        const menu = payload.restaurantInfo.menu.map((el: any) => {
+            return {
+                category: el.category,
+
+                // format items
+                items: el.items.map((item: any) => {
+                    // split 'name - pice' to [name, price]
+                    const itemSplit = item.split('-');
+                    return {
+                        name: itemSplit[0].trim(),
+                        price: Number(itemSplit[1].trim()),
+                    };
+                }),
+            };
+        });
+
         payload = {
             ownerInfo: payload.ownerInfo,
             restaurantInfo: {
                 ...payload.restaurantInfo,
+                menu,
                 photo: uploadedPhoto,
                 payments: payload.restaurantInfo.payments.split(','),
             },
@@ -79,6 +96,7 @@ export class AuthService {
             )
             .subscribe({
                 next: (res) => {
+                    this.snackBar.open(res.message);
                     this.router.navigateByUrl('/auth/login');
                 },
                 error: (err: any) => {

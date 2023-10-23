@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { NgIconsModule } from '@ng-icons/core';
 import {
     ionBookmarkOutline,
@@ -121,6 +121,10 @@ import { RestaurantCardComponent } from './components/restaurant-card/restaurant
             provide: HTTP_INTERCEPTORS,
             useClass: RefeshTokenInterceptor,
             multi: true,
+        },
+        {
+            provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+            useValue: { duration: 4000 },
         },
     ],
     bootstrap: [AppComponent],

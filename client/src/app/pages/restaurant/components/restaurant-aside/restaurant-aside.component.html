@@ -21,23 +21,23 @@
     <div class="additional">
         <div>
             <p><ng-icon class="icon" name="ionLocationOutline" />Location</p>
-            <p>Thu Duc, Ho Chi Minh city</p>
+            <p>{{ restaurant.address }}</p>
         </div>
         <div>
             <p><ng-icon class="icon" name="ionTimeOutline" />Hours of operation</p>
-            <p>8:00 AM ~ 12:00 PM</p>
+            <p>{{ restaurant.openTime }} ~ {{ restaurant.closeTime }}</p>
         </div>
         <div>
             <p><ng-icon class="icon" name="ionPhonePortraitSharp" />Phone number</p>
-            <p>0962258348</p>
+            <p>{{ restaurant.phoneNumber }}</p>
         </div>
-        <div>
+        <div *ngIf="restaurant.cuisines">
             <p><ng-icon class="icon" name="circumForkKnife" />Cuisines</p>
             <p>Vietnamese</p>
         </div>
         <div>
             <p><ng-icon class="icon" name="circumMoneyCheck1" />Payments</p>
-            <p>Credit card, Visa, Cash</p>
+            <p>{{ restaurant.payments.join(', ') }}</p>
         </div>
     </div>
 </aside>

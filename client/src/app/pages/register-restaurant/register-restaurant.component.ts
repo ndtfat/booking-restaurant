@@ -31,7 +31,7 @@ export class RegisterRestaurantComponent {
         phoneNumber: '',
         address: '',
         photo: null,
-        menu: [{ name: '', items: [] }],
+        menu: [{ category: '', items: [] }],
         openTime: '',
         closeTime: '',
         payments: '',

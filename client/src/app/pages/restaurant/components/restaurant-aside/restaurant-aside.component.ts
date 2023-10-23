@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
+import Restaurant from 'src/app/_share/models/Restaurant';
 
 @Component({
     selector: 'app-restaurant-aside',
@@ -11,6 +12,8 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
     styleUrls: ['./restaurant-aside.component.scss'],
 })
 export class RestaurantAsideComponent {
+    @Input() restaurant!: Restaurant;
+
     bookingForm: FormGroup = new FormGroup({
         numberOfGuests: new FormControl('', { validators: [Validators.required] }),
         date: new FormControl('', { validators: [Validators.required] }),

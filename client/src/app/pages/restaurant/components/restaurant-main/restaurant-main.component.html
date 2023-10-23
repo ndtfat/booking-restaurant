@@ -1,4 +1,4 @@
-<main>
+<main *ngIf="restaurant">
     <ul class="header">
         <li class="overview" (click)="onScrollToSection('overview')">Overview</li>
         <li class="photo" (click)="onScrollToSection('photo')">Photos</li>
@@ -6,7 +6,7 @@
         <li class="review" (click)="onScrollToSection('review')">Reviews</li>
     </ul>
 
-    <h1 id="overview" class="restaurant-name">La Sen</h1>
+    <h1 id="overview" class="restaurant-name">{{ restaurant.name }}</h1>
 
     <div class="overview">
         <p>
@@ -15,11 +15,11 @@
         </p>
         <p>
             <ng-icon class="icon" name="circumMoneyBill" />
-            {{ 30 | currency }} ~ {{ 50 | currency }}
+            {{ price[0] | currency }} ~ {{ price[1] | currency }}
         </p>
         <p>
             <ng-icon class="icon" name="ionPersonOutline" />
-            2 ~ 10
+            {{ restaurant.reservationSize }}
         </p>
     </div>
 
@@ -30,7 +30,7 @@
 
     <div id="menu" class="section menu">
         <h1 class="title">Menu</h1>
-        <app-drop-down name="Main dish" [items]="['Cheese Hamburger', 'Tomato Pizaa']" />
+        <app-drop-down *ngFor="let category of restaurant.menu" [name]="category.category" [items]="category.items" />
     </div>
 
     <div id="review" class="section review">

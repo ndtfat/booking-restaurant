@@ -32,7 +32,7 @@
 
     ul {
         font-size: 16px;
-        margin-top: 10px;
+        margin-top: 14px;
         padding-left: 24px;
         overflow: hidden;
         max-height: 0;
@@ -40,6 +40,12 @@
 
         li {
             padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+
+            span {
+                color: green;
+            }
         }
     }
 }

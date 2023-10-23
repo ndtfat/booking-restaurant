@@ -1,5 +1,5 @@
-import { Component, ElementRef } from '@angular/core';
-import { RestaurantService } from 'src/app/services/restaurant.service';
+import { Component, ElementRef, Input } from '@angular/core';
+import Restaurant from 'src/app/_share/models/Restaurant';
 
 @Component({
     selector: 'app-restaurant-main',
@@ -7,7 +7,10 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
     styleUrls: ['./restaurant-main.component.scss'],
 })
 export class RestaurantMainComponent {
-    constructor(private el: ElementRef, private restaurantSv: RestaurantService) {}
+    @Input() restaurant!: Restaurant;
+    @Input() price!: number[];
+
+    constructor(private el: ElementRef) {}
 
     onScrollToSection(sectionId: string) {
         const section = this.el.nativeElement.querySelector(`#${sectionId}`);

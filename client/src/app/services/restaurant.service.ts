@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Reservation from '../_share/models/Reservation';
+import Restaurant from '../_share/models/Restaurant';
 import Review from '../_share/models/Review';
 import { AuthService } from './auth.service';
 
@@ -17,6 +19,16 @@ export class RestaurantService {
         private authSv: AuthService,
         private snackbar: MatSnackBar,
     ) {}
+
+    getRestaurantById(restaurantId: string): Observable<{ message: string; data: Restaurant }> {
+        return this.http.get<{ message: string; data: Restaurant }>(
+            environment.SERVER_URL + `/restaurant/${restaurantId}`,
+        );
+    }
+
+    getSuggestRestaurants(): Observable<{ message: string; data: Restaurant[] }> {
+        return this.http.get<{ message: string; data: Restaurant[] }>(environment.SERVER_URL + '/restaurant/suggest');
+    }
 
     checkLogin(): boolean {
         if (!this.authSv.user) {

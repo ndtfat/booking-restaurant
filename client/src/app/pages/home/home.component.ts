@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { RestaurantService } from 'src/app/services/restaurant.service';
+import Restaurant from 'src/app/_share/models/Restaurant';
 
 @Component({
     selector: 'app-home',
@@ -11,8 +13,10 @@ import { AuthService } from 'src/app/services/auth.service';
                 <div>
                     <p class="title">Restaurant for you</p>
                     <ul class="restaurant-list">
-                        <li>
-                            <a [routerLink]="'/restaurant/1'"><app-restaurant-card /></a>
+                        <li *ngFor="let restaurant of suggestRestaurants">
+                            <a [routerLink]="'/restaurant/' + restaurant._id"
+                                ><app-restaurant-card [restaurant]="restaurant"
+                            /></a>
                         </li>
                     </ul>
                 </div>
@@ -21,5 +25,11 @@ import { AuthService } from 'src/app/services/auth.service';
     `,
 })
 export class HomeComponent {
-    constructor(private authService: AuthService) {}
+    suggestRestaurants!: Restaurant[];
+
+    constructor(private authService: AuthService, private restaurantSv: RestaurantService) {
+        this.restaurantSv.getSuggestRestaurants().subscribe((res) => {
+            this.suggestRestaurants = res.data;
+        });
+    }
 }
