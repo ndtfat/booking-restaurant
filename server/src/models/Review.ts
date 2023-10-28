@@ -5,7 +5,7 @@ const ReviewSchema = new Schema(
     {
         rate: { type: Object, required: true },
         content: { type: String, require: true },
-        clientId: { type: String, required: true },
+        clientId: { type: String, required: true, ref: 'users' },
         restaurantId: { type: String, required: true },
     },
     {

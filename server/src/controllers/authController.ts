@@ -9,13 +9,13 @@ import Restaurant from '../models/Restaurant';
 
 const generateAccessToken = (data: any) => {
     return jwt.sign(data, process.env.ACCESS_TOKEN_KEY as string, {
-        expiresIn: '30s',
+        expiresIn: '1d',
     });
 };
 
 const generateRefreshToken = (data: any) => {
     return jwt.sign(data, process.env.REFRESH_TOKEN_KEY as string, {
-        expiresIn: '1m',
+        expiresIn: '7d',
     });
 };
 
@@ -83,7 +83,7 @@ class AuthController {
             const safeData = {
                 id: user.id,
                 email: user.email,
-                isRestaurantOWner: user.isRestaurantOwner,
+                isRestaurantOwner: user.isRestaurantOwner,
             };
             const accessToken = generateAccessToken(safeData);
             const refreshToken = generateRefreshToken(safeData);
@@ -136,7 +136,7 @@ class AuthController {
             const safeData = {
                 id: user.id,
                 email: user.email,
-                isRestaurantOWner: user.isRestaurantOwner,
+                isRestaurantOwner: user.isRestaurantOwner,
             };
 
             // check token existence
