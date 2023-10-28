@@ -11,7 +11,7 @@ import Restaurant from 'src/app/_share/models/Restaurant';
                 <p class="location">{{ restaurant.address }}</p>
                 <div class="name">
                     <p>{{ restaurant.name }}</p>
-                    <span class="rate">{{ restaurant.rate }}</span>
+                    <span class="rate">{{ restaurant.rate.toFixed(1) }}</span>
                 </div>
                 <p class="operation-tiome">{{ restaurant.openTime }} ~ {{ restaurant.closeTime }}</p>
                 <p class="price">Price: {{ 10 | currency }} ~ {{ 40 | currency }}</p>

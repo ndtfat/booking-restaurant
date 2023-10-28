@@ -6,7 +6,7 @@ import { RegisterRestaurantComponent } from './pages/register-restaurant/registe
 import { RestaurantComponent } from './pages/restaurant/restaurant.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: HomeComponent, pathMatch: 'full' },
     { path: 'auth/:type', component: AuthComponent },
     { path: 'register-restaurant', component: RegisterRestaurantComponent },
     { path: 'restaurant/:id', component: RestaurantComponent },

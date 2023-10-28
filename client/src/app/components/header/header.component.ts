@@ -25,6 +25,12 @@ import { AuthService } from 'src/app/services/auth.service';
                     <li [routerLink]="'/auth/login'">Log in</li>
                     <li [routerLink]="'/register-restaurant'">Register my restaurant</li>
                 </ul>
+                <ul *ngIf="logIned">
+                    <li [routerLink]="'/user/profile'">My profile</li>
+                    <li [routerLink]="'/user/history'">My history</li>
+                    <li [routerLink]="'/user/saved-restaurant'">My saved restaurant</li>
+                    <li (click)="onSignOut()">Sign out</li>
+                </ul>
             </span>
         </div>
     `,
@@ -48,6 +54,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     goHomePage() {
         this.router.navigateByUrl('/');
+    }
+
+    onSignOut() {
+        this.authSv.signOut();
     }
 
     ngOnDestroy() {

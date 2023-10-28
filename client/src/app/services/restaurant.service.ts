@@ -30,6 +30,14 @@ export class RestaurantService {
         return this.http.get<{ message: string; data: Restaurant[] }>(environment.SERVER_URL + '/restaurant/suggest');
     }
 
+    getReview(restaurantId: string) {
+        const clientId = this.authSv.user?.id;
+
+        return this.http.get<{ message: string; data: { yourReview: Review; reviews: Review[] } }>(
+            environment.SERVER_URL + `/restaurant/${restaurantId}/get-review/${clientId}`,
+        );
+    }
+
     checkLogin(): boolean {
         if (!this.authSv.user) {
             this.snackbar.open('Please login first to use this service', 'Login', { duration: 4000 });
@@ -71,11 +79,6 @@ export class RestaurantService {
             clientId: this.authSv.user?.id,
             restaurantId,
         };
-        this.http.post<{ message: string; data: Review }>(environment.SERVER_URL + '/user/review', reqBody).subscribe({
-            next: (res) => {
-                console.log(res);
-            },
-            error: (err) => console.log(err),
-        });
+        return this.http.post<{ message: string; data: Review }>(environment.SERVER_URL + '/user/review', reqBody);
     }
 }

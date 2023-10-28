@@ -9,6 +9,7 @@ import Restaurant from 'src/app/_share/models/Restaurant';
     selector: 'app-restaurant',
     styleUrls: ['./restaurant.component.scss'],
     template: `
+        <app-loader *ngIf="!restaurantInfo" />
         <div *ngIf="restaurantInfo" class="wrapper">
             <div class="restaurant-img">
                 <img [src]="restaurantInfo.photos[0]" alt="restaurant-image" />

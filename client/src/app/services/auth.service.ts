@@ -118,7 +118,11 @@ export class AuthService {
                     const restaurantRes = res.data.restaurant;
                     localStorage.setItem('user', JSON.stringify(userRes));
                     localStorage.setItem('restaurant', JSON.stringify(restaurantRes));
-                    this.router.navigateByUrl('/');
+
+                    console.log(userRes);
+
+                    if (userRes.isRestaurantOwner) this.router.navigateByUrl('/restaurant-management');
+                    else this.router.navigateByUrl('/');
                 },
                 error: (err) => {
                     this.snackBar.open(err.error.message, 'OK');
@@ -128,6 +132,7 @@ export class AuthService {
 
     signOut() {
         localStorage.removeItem('user');
+        localStorage.removeItem('restaurant');
         this.router.navigateByUrl('/auth/login');
     }
 

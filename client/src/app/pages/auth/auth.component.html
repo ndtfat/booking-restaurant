@@ -28,7 +28,9 @@
                 />
             </div>
 
-            <app-button class="submit-btn" [primary]="true">SUBMIT</app-button>
+            <app-button class="submit-btn" [primary]="true">{{
+                authType === 'login' ? 'LOG IN' : 'REGISTER'
+            }}</app-button>
         </form>
 
         <div *ngIf="authType === 'login'" class="separate"><span>Or</span></div>

@@ -41,13 +41,12 @@
 
         p {
             display: flex;
-            color: $primary;
-            // font-size: 16px;
+            color: $secondary;
             font-weight: 500;
             margin-right: 10px;
 
             span {
-                color: #333;
+                color: $primary;
                 margin-right: 4px;
             }
         }

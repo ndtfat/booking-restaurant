@@ -33,9 +33,15 @@
         <app-drop-down *ngFor="let category of restaurant.menu" [name]="category.category" [items]="category.items" />
     </div>
 
-    <div id="review" class="section review">
+    <div *ngIf="isLogedin" id="review" class="section review">
         <h1 class="title">Reviews</h1>
-        <app-restaurant-review-form />
+        <!-- If user reviewed restaurant, display user review,. If not show the form -->
+        <app-restaurant-review-form *ngIf="!yourReview" (userReview)="onUserReview($event)" />
+        <div *ngIf="yourReview" class="your-review">
+            <p>Your review</p>
+            <app-restaurant-review [reviewData]="yourReview" />
+        </div>
+
         <div class="filter">
             <p>50 reviews</p>
             <select #filter (change)="onFilterChange(filter.value)">
@@ -43,6 +49,9 @@
                 <option value="latest">Latest</option>
             </select>
         </div>
-        <app-restaurant-review />
+
+        <div *ngIf="reviews && reviews.length > 0">
+            <app-restaurant-review *ngFor="let review of reviews" [reviewData]="review" />
+        </div>
     </div>
 </main>

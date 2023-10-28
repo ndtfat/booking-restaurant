@@ -41,7 +41,7 @@ export class AuthComponent {
 
     onChangeAuthType(type: string) {
         if (type === 'register-restaurant') this.router.navigateByUrl('/register-restaurant');
-        else this.authType = type;
+        else this.router.navigateByUrl(`/auth/${type}`);
     }
 
     isValidForSubmit(): boolean {

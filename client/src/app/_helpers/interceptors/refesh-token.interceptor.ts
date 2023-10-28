@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class RefeshTokenInterceptor implements HttpInterceptor {
     isRefreshing: boolean = false;
     refreshTOkenObject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private _snackbar: MatSnackBar) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let reqWithToken = request;
@@ -21,7 +22,8 @@ export class RefeshTokenInterceptor implements HttpInterceptor {
             catchError((error) => {
                 const errorMessage = error.error.message;
                 // Singout when refresh token is expired
-                if (errorMessage.includes('Refresh Token expired')) {
+                if (errorMessage && errorMessage.includes('Refresh Token expired')) {
+                    this._snackbar.open('Login session has expired, please log in again', 'OK');
                     this.authService.signOut();
                     return throwError(error);
                 }
