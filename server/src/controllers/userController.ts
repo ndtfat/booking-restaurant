@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { Request, Response } from 'express';
 import Reservation from '../models/Reservation';
 import Restaurant from '../models/Restaurant';
@@ -51,8 +52,38 @@ class UserController {
 
             if (user) {
                 user.savedRestaurants.push(restaurantId);
-                user.save();
-                return res.status(200).json({ message: 'Restaurants saved successfully' });
+                const modifiedUser = await user.save();
+
+                return res
+                    .status(200)
+                    .json({
+                        message: 'Restaurants saved successfully',
+                        savedRestaurants: modifiedUser.savedRestaurants,
+                    });
+            }
+            return res.status(404).json({ message: 'User not found' });
+        } catch (error) {
+            res.status(500).json({ message: 'Internal Server Error', error });
+        }
+    }
+
+    // [POST] /user/unsave
+    async unsaveRestaurant(req: Request, res: Response) {
+        try {
+            const userId = req.body.userId;
+            const restaurantId = req.body.restaurantId;
+            const user = await User.findById(userId);
+
+            if (user) {
+                user.savedRestaurants = user.savedRestaurants.filter((id) => id !== restaurantId);
+                const modifiedUser = await user.save();
+                const safeData = {
+                    id: modifiedUser.id,
+                    email: modifiedUser.email,
+                    isRestaurantOwner: modifiedUser.isRestaurantOwner,
+                    savedRestaurants: modifiedUser.savedRestaurants,
+                };
+                return res.status(200).json({ message: 'Unsave restaurant successfully', user: safeData });
             }
             return res.status(404).json({ message: 'User not found' });
         } catch (error) {

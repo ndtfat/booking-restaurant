@@ -15,8 +15,8 @@ import Restaurant from 'src/app/_share/models/Restaurant';
             <div class="restaurant-img">
                 <img [src]="restaurantInfo.photos[0]" alt="restaurant-image" />
                 <app-button [primary]="true" class="save-btn" (click)="onSaveRestaurant()">
-                    <ng-icon class="save-icon" name="ionBookmarkOutline" />
-                    <span>Save this restaurant</span>
+                    <ng-icon class="save-icon" [name]="restaurantIsSaved ? 'ionBookmark' : 'ionBookmarkOutline'" />
+                    <span>{{ restaurantIsSaved ? 'Saved' : 'Save this restaurant' }}</span>
                 </app-button>
             </div>
 
@@ -35,6 +35,7 @@ export class RestaurantComponent {
     });
     restaurantId!: string;
     restaurantInfo!: Restaurant;
+    restaurantIsSaved!: boolean;
     price: number[] = [Infinity, -Infinity];
 
     constructor(
@@ -61,6 +62,9 @@ export class RestaurantComponent {
                 });
             });
         });
+
+        //
+        this.restaurantIsSaved = !!authSv.user?.savedRestaurants.includes(this.restaurantId);
     }
 
     onScrollToSection(sectionId: string) {
@@ -86,6 +90,11 @@ export class RestaurantComponent {
     }
 
     onSaveRestaurant() {
-        this.userSv.saveRestaurant(this.restaurantId);
+        if (this.restaurantIsSaved) {
+            this.userSv.unsaveRestaurant(this.restaurantId);
+        } else {
+            this.userSv.saveRestaurant(this.restaurantId);
+        }
+        this.restaurantIsSaved = !this.restaurantIsSaved;
     }
 }

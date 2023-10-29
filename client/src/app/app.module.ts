@@ -12,6 +12,7 @@ import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/mater
 import { NgIconsModule } from '@ng-icons/core';
 import {
     ionBookmarkOutline,
+    ionBookmark,
     ionChatboxOutline,
     ionCloseCircleOutline,
     ionCloudUploadOutline,
@@ -110,6 +111,7 @@ import { LoaderComponent } from './components/loader/loader.component';
             ionPhonePortraitSharp,
             ionCloudUploadOutline,
             ionBookmarkOutline,
+            ionBookmark,
             circumForkKnife,
             circumMoneyBill,
             circumChat1,

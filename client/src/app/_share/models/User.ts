@@ -5,7 +5,7 @@ export default interface User {
     email: string;
     username: string;
     isRestaurantOwner: boolean;
-    savedRestaurants: Restaurant[];
+    savedRestaurants: string[];
     accessToken: string;
     refreshToken: string;
 }

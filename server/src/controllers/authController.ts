@@ -84,6 +84,7 @@ class AuthController {
                 id: user.id,
                 email: user.email,
                 isRestaurantOwner: user.isRestaurantOwner,
+                savedRestaurants: user.savedRestaurants,
             };
             const accessToken = generateAccessToken(safeData);
             const refreshToken = generateRefreshToken(safeData);
