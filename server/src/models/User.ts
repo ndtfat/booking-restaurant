@@ -7,6 +7,7 @@ const UserSchema = new Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isRestaurantOwner: { type: Boolean, required: true, default: false },
+    savedRestaurants: { type: Array, required: true, default: [] },
 });
 
 export default mongoose.model('users', UserSchema);

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
+import { UserService } from 'src/app/services/user.service';
 import Restaurant from 'src/app/_share/models/Restaurant';
 
 @Component({
@@ -13,7 +14,7 @@ import Restaurant from 'src/app/_share/models/Restaurant';
         <div *ngIf="restaurantInfo" class="wrapper">
             <div class="restaurant-img">
                 <img [src]="restaurantInfo.photos[0]" alt="restaurant-image" />
-                <app-button [primary]="true" class="save-btn">
+                <app-button [primary]="true" class="save-btn" (click)="onSaveRestaurant()">
                     <ng-icon class="save-icon" name="ionBookmarkOutline" />
                     <span>Save this restaurant</span>
                 </app-button>
@@ -40,6 +41,7 @@ export class RestaurantComponent {
         private el: ElementRef,
         private route: ActivatedRoute,
         private authSv: AuthService,
+        private userSv: UserService,
         private restaurantSv: RestaurantService,
     ) {
         route.params.subscribe((params) => {
@@ -81,5 +83,9 @@ export class RestaurantComponent {
                     this.restaurantId,
                 );
         }
+    }
+
+    onSaveRestaurant() {
+        this.userSv.saveRestaurant(this.restaurantId);
     }
 }

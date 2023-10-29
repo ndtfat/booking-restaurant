@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.post('/booking', verifyToken, userController.booking);
 router.post('/review', verifyToken, userController.review);
+router.post('/save-restaurant', verifyToken, userController.saveRestaurant);
 
 export default router;

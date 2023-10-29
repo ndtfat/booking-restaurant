@@ -13,20 +13,26 @@ export class RestaurantMainComponent {
     @Input() restaurant!: Restaurant;
     @Input() price!: number[];
     isLogedin!: boolean;
-    yourReview: Review | undefined;
     reviews!: Review[];
+    yourReview: Review | undefined;
+    sort: string = 'desc';
+    numberOfReviews!: number;
 
     constructor(private el: ElementRef, private authSv: AuthService, private restairantSv: RestaurantService) {
         this.isLogedin = !!authSv.user;
     }
 
-    ngAfterViewInit() {
+    getReview() {
         if (this.restaurant)
-            this.restairantSv.getReview(this.restaurant._id).subscribe((res) => {
+            this.restairantSv.getReview(this.restaurant._id, this.sort).subscribe((res) => {
                 this.reviews = res.data.reviews;
                 this.yourReview = res.data.yourReview;
-                console.log(this.yourReview);
+                this.numberOfReviews = res.data.numberOfReviews;
             });
+    }
+
+    ngAfterViewInit() {
+        this.getReview();
     }
 
     onScrollToSection(sectionId: string) {
@@ -41,8 +47,9 @@ export class RestaurantMainComponent {
         });
     }
 
-    onFilterChange(filterOption: string) {
-        console.log(filterOption);
+    onFilterChange(sortOption: string) {
+        this.sort = sortOption;
+        this.getReview();
     }
 
     onUserReview(reviewData: Review) {

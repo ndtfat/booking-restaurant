@@ -41,8 +41,12 @@ class RestaurantController {
                 .sort({ createdAt: sort })
                 .limit(limit);
             const clientReview = await Review.findOne({ restaurantId, clientId }).populate('clientId', 'username');
+            const numberOfReviews = await Review.find({ restaurantId, clientId: { $ne: clientId } }).count();
 
-            res.status(200).json({ message: 'Get reviews successfully', data: { yourReview: clientReview, reviews } });
+            res.status(200).json({
+                message: 'Get reviews successfully',
+                data: { yourReview: clientReview, reviews, numberOfReviews },
+            });
         } catch (error) {
             res.status(500).json({ message: 'Internal Server Error', error });
         }

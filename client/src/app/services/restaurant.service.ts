@@ -30,12 +30,13 @@ export class RestaurantService {
         return this.http.get<{ message: string; data: Restaurant[] }>(environment.SERVER_URL + '/restaurant/suggest');
     }
 
-    getReview(restaurantId: string) {
+    getReview(restaurantId: string, sort: string) {
         const clientId = this.authSv.user?.id;
 
-        return this.http.get<{ message: string; data: { yourReview: Review; reviews: Review[] } }>(
-            environment.SERVER_URL + `/restaurant/${restaurantId}/get-review/${clientId}`,
-        );
+        return this.http.get<{
+            message: string;
+            data: { yourReview: Review; reviews: Review[]; numberOfReviews: number };
+        }>(environment.SERVER_URL + `/restaurant/${restaurantId}/get-review/${clientId}?sortBy=${sort}`);
     }
 
     checkLogin(): boolean {

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Reservation from '../models/Reservation';
 import Restaurant from '../models/Restaurant';
 import Review from '../models/Review';
+import User from '../models/User';
 
 class UserController {
     // [POST] /user/booking/
@@ -36,6 +37,24 @@ class UserController {
             const newReivew = await Review.create(payload);
 
             res.status(200).json({ message: 'Review successful', data: newReivew });
+        } catch (error) {
+            res.status(500).json({ message: 'Internal Server Error', error });
+        }
+    }
+
+    // [POST] /user/save
+    async saveRestaurant(req: Request, res: Response) {
+        try {
+            const userId = req.body.userId;
+            const restaurantId = req.body.restaurantId;
+            const user = await User.findById(userId);
+
+            if (user) {
+                user.savedRestaurants.push(restaurantId);
+                user.save();
+                return res.status(200).json({ message: 'Restaurants saved successfully' });
+            }
+            return res.status(404).json({ message: 'User not found' });
         } catch (error) {
             res.status(500).json({ message: 'Internal Server Error', error });
         }

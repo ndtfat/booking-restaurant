@@ -43,10 +43,10 @@
         </div>
 
         <div class="filter">
-            <p>50 reviews</p>
+            <p>{{ numberOfReviews }} reviews</p>
             <select #filter (change)="onFilterChange(filter.value)">
-                <option value="newest">Newest</option>
-                <option value="latest">Latest</option>
+                <option value="desc">Newest</option>
+                <option value="asc">Latest</option>
             </select>
         </div>
 
