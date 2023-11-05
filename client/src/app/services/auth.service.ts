@@ -17,7 +17,7 @@ export class AuthService {
     constructor(
         private http: HttpClient,
         private router: Router,
-        private snackBar: MatSnackBar,
+        private _snackBar: MatSnackBar,
         private fbStorage: AngularFireStorage,
     ) {}
 
@@ -35,6 +35,15 @@ export class AuthService {
         return restaurantJSON ? JSON.parse(restaurantJSON) : null;
     }
 
+    checkLogedIn(): boolean {
+        if (!this.user) {
+            this._snackBar.open('Log in to use this service', 'OK');
+            this.router.navigateByUrl('/auth/login');
+            return false;
+        }
+        return true;
+    }
+
     refreshToken(refreshToken: string): Observable<{ message: string; data: string }> {
         return this.http.post<{ message: string; data: string }>(environment.SERVER_URL + '/auth/refreshToken', {
             refreshToken,
@@ -48,7 +57,7 @@ export class AuthService {
                 this.router.navigateByUrl('/auth/login');
             },
             error: (err) => {
-                this.snackBar.open(err.error.message, 'OK');
+                this._snackBar.open(err.error.message, 'OK');
             },
         });
     }
@@ -96,12 +105,12 @@ export class AuthService {
             )
             .subscribe({
                 next: (res) => {
-                    this.snackBar.open(res.message);
+                    this._snackBar.open(res.message);
                     this.router.navigateByUrl('/auth/login');
                 },
                 error: (err: any) => {
                     console.log(err);
-                    this.snackBar.open(err.error.message, 'OK');
+                    this._snackBar.open(err.error.message, 'OK');
                 },
             });
     }
@@ -125,7 +134,7 @@ export class AuthService {
                     else this.router.navigateByUrl('/');
                 },
                 error: (err) => {
-                    this.snackBar.open(err.error.message, 'OK');
+                    this._snackBar.open(err.error.message, 'OK');
                 },
             });
     }

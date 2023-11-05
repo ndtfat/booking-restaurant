@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import User from '../_share/models/User';
 import { AuthService } from './auth.service';
@@ -12,6 +13,8 @@ export class UserService {
     constructor(private http: HttpClient, private authSv: AuthService, private _snackbar: MatSnackBar) {}
 
     saveRestaurant(restaurantId: string) {
+        if (this.authSv.checkLogedIn()) return;
+
         this.http
             .post<{ message: string; savedRestaurants: string[] }>(environment.SERVER_URL + '/user/save-restaurant', {
                 userId: this.authSv.user?.id,
@@ -28,6 +31,8 @@ export class UserService {
     }
 
     unsaveRestaurant(restaurantId: string) {
+        if (this.authSv.checkLogedIn()) return;
+
         this.http
             .post<{ message: string; savedRestaurants: string[] }>(environment.SERVER_URL + '/user/unsave-restaurant', {
                 userId: this.authSv.user?.id,
